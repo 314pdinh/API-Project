@@ -9,8 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-
-    await queryInterface.createTable('Bookings', {
+    await queryInterface.createTable('SpotImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -23,17 +22,13 @@ module.exports = {
           model: 'Spots'
         }
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users'
-        }
+      url: {
+        type: Sequelize.TEXT,
+        allowNull: false
       },
-      startDate: {
-        type: Sequelize.DATE
-      },
-      endDate: {
-        type: Sequelize.DATE
+      preview: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -49,13 +44,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-    options.tableName = 'Bookings'
-    await queryInterface.droptable('Bookings');
+    options.tableName = 'SpotImages'
+    await queryInterface.dropTable(options)
   }
 };

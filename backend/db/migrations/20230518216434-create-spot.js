@@ -1,7 +1,5 @@
 'use strict';
 
-const { SELECT } = require('sequelize/types/query-types');
-
 /** @type {import('sequelize-cli').Migration} */
 
 let options = {};
@@ -19,9 +17,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       ownerId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Users'
+          model: 'Users',
         }
       },
       address: {
@@ -74,15 +72,8 @@ module.exports = {
     }, options)
   },
 
-
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
     options.tableName = 'Spots'
-    await queryInterface.dropTable('Spots')
+    await queryInterface.dropTable(options)
   }
 };

@@ -7,10 +7,9 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('SpotImages', {
+    await queryInterface.createTable('Reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -23,12 +22,18 @@ module.exports = {
           model: 'Spots'
         }
       },
-      url: {
-        type: Sequelize.TEXT,
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users'
+        }
+      },
+      review: {
+        type: Sequelize.STRING,
         allowNull: false
       },
-      preview: {
-        type: Sequelize.BOOLEAN,
+      stars: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       createdAt: {
@@ -44,9 +49,8 @@ module.exports = {
     }, options)
   },
 
-
   async down (queryInterface, Sequelize) {
-    options.tableName = 'SpotImages'
-    await queryInterface.dropTable('SpotImages')
+    options.tableName = 'Reviews'
+    return queryInterface.dropTable(options)
   }
 };
