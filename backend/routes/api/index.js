@@ -3,8 +3,8 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const { restoreUser } = require('../../utils/auth.js');
-
-const spotsRouter = require('./spots.js')
+const reviewsRouter = require('./reviews.js');
+const spotsRouter = require('./spots.js');
 // backend/routes/api/index.js
 // ...
 
@@ -31,22 +31,14 @@ const spotsRouter = require('./spots.js')
 //   return res.json({ user: user });
 // });
 
-// ...
-
-// backend/routes/api/index.js
-// ...
-
 // GET /api/restore-user
-
 router.use(restoreUser);
-
 // router.get(
 //   '/restore-user',
 //   (req, res) => {
 //     return res.json(req.user);
 //   }
 // );
-
 
 // const { requireAuth } = require('../../utils/auth.js');
 // router.get(
@@ -57,17 +49,14 @@ router.use(restoreUser);
 //   }
 // );
 
-// ...
-
-
 router.use(restoreUser);
 
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-router.use('/spots', spotsRouter)
-
+router.use('/spots', spotsRouter);
+router.use('/reviews', reviewsRouter);
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
