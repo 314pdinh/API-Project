@@ -44,6 +44,30 @@ module.exports = {
       price: 524.99
     },
     {
+      ownerId: 2,
+      address: '100 Popa Drive',
+      city: 'Boston',
+      state: 'Massachussettes',
+      country: 'United States',
+      lat: 94.7258580,
+      lng: 12.1402455,
+      name: 'Magnificient',
+      description: 'Sunset amazing!',
+      price: 424.99
+    },
+    {
+      ownerId: 2,
+      address: '201 Bea Avenue',
+      city: 'Boston',
+      state: 'Massachussettes',
+      country: 'United States',
+      lat: 55.7133491,
+      lng: 63.2320131,
+      name: 'Purple',
+      description: 'Taro',
+      price: 399.99
+    },
+    {
       ownerId: 3,
       address: '917 Blue Street',
       city: 'San Antonio',

@@ -2,29 +2,18 @@ const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 const { Op } = require('sequelize');
-const { Spot, Review, SpotImage } = require('../../db/models')
+const { Spot, Review, SpotImage, User } = require('../../db/models')
 
 // Get all Spots owned by the Current User 
 
 router.get('/current', requireAuth, async (req, res, next) => {
-    const spots = await Spot.findAll({
-        where: {
-            ownerId: req.user.id
-        },
-        include: [{
-            model: SpotImage
-        },
-        {
-            model: Review
-        }]
-    })
-
-
+    const { user } = req;
     const allSpots = await Spot.findAll({
-        include: [
-            {model: Review},
-            {model: SpotImage}
-        ],
+    where : {ownerId : user.id},
+    include: [
+        { model: Review },
+        { model: SpotImage }
+    ]
     });
 
     let Spots = [];
@@ -58,6 +47,66 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     return res.status(200).json({Spots});
 });
+
+// Get details of a Spot from an id
+router.get('/:spotId', async (req, res, next) => {
+    const spotId = await Spot.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: SpotImage,
+                attributes: ['id', 'url', 'preview']
+            },
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: Review
+            }
+        ]
+    })
+    if (!spotId) {
+        return res.status(404).json({ message: "Spot couldn't be found" })
+    }
+
+    const spotJson = spotId.toJSON()
+    const total = await Review.count({
+        where: { spotId: req.params.spotId }
+    })
+    
+    const stars = await Review.sum('stars', {
+        where: {
+            spotId: req.params.spotId
+        }
+    })
+
+    spotJson.numReviews = total
+    spotJson.avgStarRating = stars / total
+    delete spotJson.Reviews
+    
+    return res.status(200).json(spotJson)
+})
+
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const { url, preview } = req.body;
+    const { user } = req;
+    const spotId = await Spot.findByPk(req.params.spotId); 
+
+    if(!spotId || spotId.ownerId !== user.id) {
+        return res.status(404).json({ message: "Spot couldn't be found" })
+    };
+
+    const newImage = await SpotImage.create({
+        spotId: spotId.id, url, preview
+    });
+
+    const obj = newImage.toJSON();
+    delete obj.spotId;
+    delete obj.createdAt;
+    delete obj.updatedAt;
+    return res.status(200).json(obj);
+})
 
 // CREATE A SPOT 
 router.post('/', requireAuth, async (req, res, next) => {
