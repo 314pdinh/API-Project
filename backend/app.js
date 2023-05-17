@@ -7,12 +7,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
-
-// backend/app.js
 const routes = require('./routes');
-
-// backend/app.js
-// ...
 const { ValidationError } = require('sequelize');
 
 
@@ -21,10 +16,6 @@ app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(express.json());
-
-
-
-// ...
 
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
@@ -39,8 +30,6 @@ app.use((err, _req, _res, next) => {
   }
   next(err);
 });
-
-
 
 // Security Middleware
 if (!isProduction) {
@@ -66,12 +55,7 @@ app.use(
     })
 );
 
-// ...
-
 app.use(routes); // Connect all the routes
-
-// backend/app.js
-// ...
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
@@ -81,12 +65,6 @@ app.use((_req, _res, next) => {
     next(err);
   });
 
-// backend/app.js
-// ...
-
-
-// backend/app.js
-// ...
 // Error formatter
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
