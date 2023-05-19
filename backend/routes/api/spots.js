@@ -5,7 +5,6 @@ const { Op } = require('sequelize');
 const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = require('../../db/models')
 
 // Get all Spots owned by the Current User 
-
 router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
     const allSpots = await Spot.findAll({
@@ -276,6 +275,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 // Create a Review for a Spot based on the Spot's id 
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     const { review, stars } = req.body;
+    const { user } = req
     const spotId = await Spot.findByPk(req.params.spotId);
     const comment = { message: 'Bad Request', errors: {} }
 
@@ -313,7 +313,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     return res.status(201).json(createdReview);
 })
 
-// ERROR HERE start and end date shows null
+// ERROR HERE start and end date shows null ***************************************
 // Get all Bookings for a Spot based on the Spot's id
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     const { user } = req;
@@ -347,10 +347,9 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 // Create a Booking from a Spot based on the Spot's id
 // router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 //     const { user } = req;
+//     const { startDate, endDate } = req.body;
 
-
-
-
+//     const spotId = await Spot.findByPk(req.params.spotId);
 
 
 // })

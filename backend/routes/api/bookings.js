@@ -4,7 +4,7 @@ const router = express.Router();
 const { Op } = require('sequelize');
 const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = require('../../db/models');
 
-
+//Check if we need an error message for spotImages **************************
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
@@ -41,11 +41,6 @@ router.get('/current', requireAuth, async (req, res) => {
     })
 
     return res.status(200).json({ Bookings: newArra });
-})
-
-// Get all Bookings for a Spot based on the Spot's id
-router.get('/:spotId/bookings', requireAuth, async (req, res) => {
-    
 })
 
 
