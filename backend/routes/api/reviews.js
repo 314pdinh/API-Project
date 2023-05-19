@@ -5,7 +5,7 @@ const { Op } = require('sequelize');
 const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = require('../../db/models');
 
 // Get all review of the current user 
-router.get('/current', requireAuth, async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
 
     const allReviews = await Review.findAll({
@@ -33,7 +33,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
     })
 
     const arra = [];
-
     allReviews.forEach(e => {
         arra.push(e.toJSON())
     })
@@ -43,12 +42,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
         review.Spot.SpotImages.forEach( rev => {
             review.Spot.previewImage = rev.url
         })
-
         delete review.Spot.SpotImages;
         newArra.push(review);
     })
-    return res.status(200).json({ Reviews: newArra })
 
+    return res.status(200).json({ Reviews: newArra });
 })
 
 // Add an Image to a Review based on the Review's ID
@@ -56,25 +54,25 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const { url } = req.body;
     const { user } = req;
 
-    const reviewId = await Review.findByPk(req.params.reviewId) 
+    const reviewId = await Review.findByPk(req.params.reviewId); 
 
     if(!reviewId || reviewId.userId !== user.id) { 
         return res.status(404).json({ message: "Review couldn't be found"})
     }
 
-    const allImages = await ReviewImage.findAll({
+    const images = await ReviewImage.findAll({
         where: {
             reviewId: req.params.reviewId
         }
     })
 
-    if (allImages.length < 10) {
+    if (images.length < 10) {
         const image = await ReviewImage.create({
             reviewId: req.params.reviewId, 
             url: url
         })
 
-        return res.json({ id: image.id, url })
+        return res.status(200).json({ id: image.id, url })
     } else {
         return res.status(403).json({ message: "Maximum number of images for this resource was reached" })
     }
@@ -94,8 +92,8 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         return res.status(404).json("Review couldn't be found")
     }
 
-    if(review.userId !== user.id) {
-        return res.status(403).json({ message: "You must login as the owner of this review to edit" })
+    if(reviewId.userId !== user.id) {
+        return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })
     }
 
     if (!review) {
@@ -115,24 +113,23 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     })
 
     await reviewId.save();
-
     return res.status(200).json(editedReview);
 })
 
 // Delete a Review 
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     const { user } = req;
-    const reviewId = await Review.findByPk(req.params.reviewId)
+    const review = await Review.findByPk(req.params.reviewId)
 
-    if(!reviewId) {
+    if(!review) {
         return res.status(404).json({ message: "Review couldn't be found" });
     }
 
-    if(reviewId.userId !== user.id) {
-        return res.status(403).json({ message: "You must login in as the Owner of this review to delete" })
+    if(review.userId !== user.id) {
+        return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })
     }
 
-    reviewId.destroy();
+    review.destroy();
     return res.status(200).json({ message: 'Successfully deleted' })
 })
 

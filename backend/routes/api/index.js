@@ -5,19 +5,13 @@ const usersRouter = require('./users.js');
 const { restoreUser } = require('../../utils/auth.js');
 const reviewsRouter = require('./reviews.js');
 const spotsRouter = require('./spots.js');
-// backend/routes/api/index.js
-// ...
-
+const spotImagesRouter = require('./spot-images.js');
+const reviewImagesRouter = require('./review-images.js');
+const bookingsRouter = require('./bookings.js')
 // router.post('/test', function(req, res) {
 //     res.json({ requestBody: req.body });
 //   });
   
-//   // ...
-
-
-//   // backend/routes/api/index.js
-// // ...
-
 // // GET /api/set-token-cookie
 // const { setTokenCookie } = require('../../utils/auth.js');
 // const { User } = require('../../db/models');
@@ -32,7 +26,7 @@ const spotsRouter = require('./spots.js');
 // });
 
 // GET /api/restore-user
-router.use(restoreUser);
+// router.use(restoreUser);
 // router.get(
 //   '/restore-user',
 //   (req, res) => {
@@ -52,11 +46,12 @@ router.use(restoreUser);
 router.use(restoreUser);
 
 router.use('/session', sessionRouter);
-
 router.use('/users', usersRouter);
-
 router.use('/spots', spotsRouter);
 router.use('/reviews', reviewsRouter);
+router.use('/spot-images', spotImagesRouter);
+router.use('/review-images', reviewImagesRouter);
+router.use('/bookings', bookingsRouter);
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
