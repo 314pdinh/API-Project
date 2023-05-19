@@ -89,7 +89,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     };
 
     if (!reviewId) {
-        return res.status(404).json("Review couldn't be found")
+        return res.status(404).json({ message: "Review couldn't be found" })
     }
 
     if(reviewId.userId !== user.id) {

@@ -28,16 +28,46 @@ module.exports = {
     },
     {
       spotId: 2,
+      userId: 1,
+      startDate: '2023-03-15',
+      endDate: '2023-04-27'
+    },
+    {
+      spotId: 3,
+      userId: 1,
+      startDate: '2023-06-25',
+      endDate: '2023-07-17'
+    },
+    {
+      spotId: 2,
       userId: 2,
       startDate: '2023-02-15',
       endDate: '2023-02-27'
+    },
+    {
+      spotId: 1,
+      userId: 2,
+      startDate: '2023-04-15',
+      endDate: '2023-04-27'
+    },
+    {
+      spotId: 3,
+      userId: 2,
+      startDate: '2023-03-05',
+      endDate: '2023-03-16'
     },
     {
       spotId: 3,
       userId: 3,
       startDate: '2023-03-05',
       endDate: '2023-03-21'
-    }
+    },
+    {
+      spotId: 2,
+      userId: 3,
+      startDate: '2023-01-15',
+      endDate: '2023-01-27'
+    },
    ], {})
   },
 
