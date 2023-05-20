@@ -23,7 +23,7 @@ module.exports = {
       {
         spotId: 1,
         url: 'https://a.cdn-hotels.com/gdcs/production13/d377/69a90c80-b69c-11e8-a439-0242ac110006.jpg?impolicy=fcrop&w=800&h=533&q=medium',
-        preview: false
+        preview: true
       },
       {
         spotId: 1,
@@ -48,7 +48,7 @@ module.exports = {
       {
         spotId: 2,
         url: 'https://media.cntraveler.com/photos/63482b255e7943ad4006df0b/1:1/w_1280%2Ch_1280%2Cc_limit/tokyoGettyImages-1031467664.jpeg',
-        preview: false
+        preview: true
       },
       {
         spotId: 2,
@@ -58,7 +58,7 @@ module.exports = {
       {
         spotId: 2,
         url: 'https://fastly.picsum.photos/id/28/4928/3264.jpg?hmac=GnYF-RnBUg44PFfU5pcw_Qs0ReOyStdnZ8MtQWJqTfA',
-        preview: false
+        preview: true
       },
       {
         spotId: 2,
@@ -67,7 +67,7 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: '',
+        url: 'https://fastly.picsum.photos/id/49/1280/792.jpg?hmac=NnUJy0O9-pXHLmY2loqVs2pJmgw9xzuixgYOk4ALCXU',
         preview: true
       },
       {
@@ -83,7 +83,7 @@ module.exports = {
       {
         spotId: 3,
         url: 'https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0',
-        preview: false
+        preview: true
       },
       {
         spotId: 3,
