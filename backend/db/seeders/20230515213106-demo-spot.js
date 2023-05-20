@@ -8,15 +8,6 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
    options.tableName = 'Spots';
    await queryInterface.bulkInsert(options, [
     {
@@ -29,6 +20,30 @@ module.exports = {
       lng: 10.1508180,
       name: 'Too',
       description: 'To be decided',
+      price: 299.99
+    },
+    {
+      ownerId: 1,
+      address: '267 Yoyo Street',
+      city: 'Atlantic City',
+      state: 'New Jersey',
+      country: 'United States',
+      lat: 79.7797794,
+      lng: 10.2000009,
+      name: 'Too LOVELY',
+      description: 'Orangey',
+      price: 199.99
+    },
+    {
+      ownerId: 1,
+      address: '123 Order Street',
+      city: 'Newark',
+      state: 'New Jersey',
+      country: 'United States',
+      lat: 33.7242424,
+      lng: 10.1242428,
+      name: 'Too hot',
+      description: 'To be VERY humid',
       price: 299.99
     },
     {
@@ -77,6 +92,30 @@ module.exports = {
       lng: 81.1794792,
       name: 'Hot',
       description: 'Great foods!',
+      price: 99.99
+    },
+    {
+      ownerId: 3,
+      address: '777 Red Street',
+      city: 'San Anita',
+      state: 'Texas',
+      country: 'United States',
+      lat: 34.1227199,
+      lng: 21.1332792,
+      name: 'cold',
+      description: 'Cold foods!',
+      price: 49.99
+    },
+    {
+      ownerId: 3,
+      address: '112 Yellow Street',
+      city: 'Los Angeles',
+      state: 'Texas',
+      country: 'United States',
+      lat: 44.1722299,
+      lng: 33.1990092,
+      name: 'Blue',
+      description: 'Blue Sky green foods!',
       price: 99.99
     },
    ], {})

@@ -7,41 +7,42 @@ const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = requi
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
-
-    const allBookings = await Booking.findAll({
+  
+    try {
+      const allBookings = await Booking.findAll({
         where: {
-            userId: user.id
-        }, 
-        include : [{
-            model: Spot,
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-            include: [ 
-                { 
-                    model: SpotImage, 
-                    where: {
-                        preview: true 
-                    }
-                }
-            ]
+          userId: user.id
+        },
+        include: [{
+          model: Spot,
+          attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+          include: [
+            {
+              model: SpotImage,
+              where: {
+                preview: true
+              }
+            }
+          ]
         }]
-    })
-
-    const arra = [];
-    allBookings.forEach( e => {
-        arra.push(e.toJSON())
-    })
-
-    const newArra = [];
-    arra.forEach( b => {
-        b.Spot.SpotImages.forEach( bo => {
-            b.Spot.previewImage = bo.url
-        })
-        delete b.Spot.SpotImages
-        newArra.push(b)
-    })
-
-    return res.status(200).json({ Bookings: newArra });
-})
+      });
+  
+      const newArra = allBookings.map(booking => {
+        const { Spot } = booking;
+        const previewImage = Spot?.SpotImages[0]?.url || null;
+        delete Spot?.SpotImages;
+        Spot.previewImage = previewImage;
+        return booking.toJSON();
+      });
+  
+      return res.status(200).json({ Bookings: newArra });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Server Error' });
+    }
+  });
+  
+  
 
 // Edit a Booking
 router.put('/:bookingId', requireAuth, async (req, res) => {
@@ -115,24 +116,26 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 // Delete a Booking
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const { user } = req;
-    const bookingId = await Booking.findByPk(req.params.bookingId);
-    const spotId = await Spot.findByPk(req.params.spotId);
+    const bookingId = await Booking.findByPk(req.params.bookingId, {
+      include: {
+        model: Spot,
+      }
+    });
 
     if (!bookingId) { 
         return res.status(404).json({ message: "Booking couldn't be found" })
     }
 
-    if(bookingId.userId !== user.id) { return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })};
+    if(bookingId.userId !== user.id && bookingId.Spot.ownerId !== user.id) { return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })};
     
     const today = new Date();
-    if(bookingId.startDate < today) {
+    if(bookingId.startDate <= today) {
         return res.status(403).json({ "message": "Bookings that have been started can't be deleted" })
     }
 
     if (!spotId) {
          return res.status(404).json({ message: "Spot couldn't be found" })
     }
-    if(spotId.ownerId !== user.id) { return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })};
     
     await bookingId.destroy();
     return res.status(200).json({ message: 'Successfully deleted' })
