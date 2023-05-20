@@ -30,6 +30,14 @@ module.exports = {
     {
       reviewId: 3,
       url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/LA_Downtown_View_%28cropped%29.jpg/800px-LA_Downtown_View_%28cropped%29.jpg'
+    },
+    {
+      reviewId: 4,
+      url: 'https://fastly.picsum.photos/id/36/4179/2790.jpg?hmac=OCuYYm0PkDCMwxWhrtoSefG5UDir4O0XCcR2x-aSPjs'
+    },
+    {
+      reviewId: 5,
+      url: 'https://fastly.picsum.photos/id/46/3264/2448.jpg?hmac=ZHE8nk-Q9uRp4MxgKNvN7V7pYFvA-9BCv99ltY3HBv4'
     }
    ], {})
   },
@@ -44,7 +52,7 @@ module.exports = {
     options.tableName = 'ReviewImages';
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      reviewId: { [Op.in]: [1, 2, 3] }
+      reviewId: { [Op.in]: [1, 2, 3, 4, 5] }
     }, {})
   }
 };
