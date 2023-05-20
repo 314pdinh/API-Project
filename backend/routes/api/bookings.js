@@ -6,41 +6,38 @@ const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = requi
 
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
-    const { user } = req;
-  
-    try {
-      const allBookings = await Booking.findAll({
-        where: {
+  const { user } = req;
+
+  const allBookings = await Booking.findAll({
+      where: {
           userId: user.id
-        },
-        include: [{
+      }, 
+      include : [{
           model: Spot,
           attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
           include: [
-            {
-              model: SpotImage,
-              where: {
-                preview: true
+              { 
+                model: SpotImage,
+                as: "previewImage",
+                attributes: [ "url" ],
+                where: { preview: true },
+                required: false,
               }
-            }
           ]
-        }]
-      });
-  
-      const newArra = allBookings.map(booking => {
-        const { Spot } = booking;
-        const previewImage = Spot?.SpotImages[0]?.url || null;
-        delete Spot?.SpotImages;
-        Spot.previewImage = previewImage;
-        return booking.toJSON();
-      });
-  
-      return res.status(200).json({ Bookings: newArra });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Server Error' });
-    }
+      }]
+  })
+
+  const newArra = allBookings.map(booking => {
+    const { Spot } = booking;
+    const previewImage = Spot?.SpotImages?.[0]?.url || null;
+    delete Spot?.SpotImages;
+    Spot.previewImage = previewImage;
+    return booking.toJSON();
   });
+  
+  return res.status(200).json({ Bookings: newArra });
+})
+
   
   
 
@@ -110,40 +107,32 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         updatedAt: booking.updatedAt
     };
     await booking.save();
-    return res.status.json(scheduleDates);
+    return res.status(200).json(scheduleDates);
 });
 
 // Delete a Booking
 router.delete('/:bookingId', requireAuth, async (req, res) => {
-  const { user } = req;
-  const bookingId = await Booking.findByPk(req.params.bookingId);
+    const { user } = req;
+    const bookingId = await Booking.findByPk(req.params.bookingId, {
+      include: {
+        model: Spot,
+      }
+    });
 
-  if (!bookingId) { 
-      return res.status(404).json({ message: "Booking couldn't be found" });
-  }
+    if (!bookingId) { 
+        return res.status(404).json({ message: "Booking couldn't be found" })
+    }
 
-  if (bookingId.userId !== user.id) {
-      return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" });
-  }
+    if(bookingId.userId !== user.id && bookingId.Spot.ownerId !== user.id) { return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })};
+    
+    const today = new Date();
+    if(bookingId.startDate <= today) {
+        return res.status(403).json({ "message": "Bookings that have been started can't be deleted" })
+    }
+    
+    await bookingId.destroy();
+    return res.status(200).json({ message: 'Successfully deleted' })
 
-  const today = new Date();
-  if (bookingId.startDate < today) {
-      return res.status(403).json({ message: "Bookings that have been started can't be deleted" });
-  }
-
-  const spotId = bookingId.spotId;
-  const spot = await Spot.findByPk(spotId);
-
-  if (!spot) {
-      return res.status(404).json({ message: "Spot couldn't be found" });
-  }
-
-  if (spot.ownerId !== user.id) {
-      return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" });
-  }
-
-  await bookingId.destroy();
-  return res.status(200).json({ message: 'Successfully deleted' });
-});
+})
 
 module.exports = router;
