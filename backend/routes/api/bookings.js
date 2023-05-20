@@ -115,31 +115,35 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
 // Delete a Booking
 router.delete('/:bookingId', requireAuth, async (req, res) => {
-    const { user } = req;
-    const bookingId = await Booking.findByPk(req.params.bookingId, {
-      include: {
-        model: Spot,
-      }
-    });
+  const { user } = req;
+  const bookingId = await Booking.findByPk(req.params.bookingId);
 
-    if (!bookingId) { 
-        return res.status(404).json({ message: "Booking couldn't be found" })
-    }
+  if (!bookingId) { 
+      return res.status(404).json({ message: "Booking couldn't be found" });
+  }
 
-    if(bookingId.userId !== user.id && bookingId.Spot.ownerId !== user.id) { return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" })};
-    
-    const today = new Date();
-    if(bookingId.startDate <= today) {
-        return res.status(403).json({ "message": "Bookings that have been started can't be deleted" })
-    }
+  if (bookingId.userId !== user.id) {
+      return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" });
+  }
 
-    if (!spotId) {
-         return res.status(404).json({ message: "Spot couldn't be found" })
-    }
-    
-    await bookingId.destroy();
-    return res.status(200).json({ message: 'Successfully deleted' })
+  const today = new Date();
+  if (bookingId.startDate < today) {
+      return res.status(403).json({ message: "Bookings that have been started can't be deleted" });
+  }
 
-})
+  const spotId = bookingId.spotId;
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+      return res.status(404).json({ message: "Spot couldn't be found" });
+  }
+
+  if (spot.ownerId !== user.id) {
+      return res.status(403).json({ message: "Authenticated user does not have the correct role(s) or permission(s)" });
+  }
+
+  await bookingId.destroy();
+  return res.status(200).json({ message: 'Successfully deleted' });
+});
 
 module.exports = router;
