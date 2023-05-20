@@ -419,17 +419,141 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
     const errors = {};
- 
+    let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
+
     if(Object.entries(errors).length){
-        return res.status(400).json({ message: "Bad Request", errors : errors
+        return res.status(400).json({ message: 'Bad Request', errors : errors
         });
+    }
+
+    page = parseInt(page) 
+    size = parseInt(size)
+
+
+    if (page < 1) {
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors: {
+                page: 'Page must be greater than or equal to 1',
+            }
+        })
+    }
+
+    if (size < 1) {
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors: {
+                size: 'Size must be greater than or equal to 1',
+            }
+        })
+    }
+
+    if (!page || page > 10) {
+        page = 1
+    }
+
+    if (!size || size > 20) {
+        size = 20
+    }
+
+    let pagination = {}
+
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
+    const where = {}
+    if (maxLat !== undefined) {
+        if (Number(maxLat) % 1 === 0) {
+            res.status(400)
+            return res.json({
+                message: 'Bad Request',
+                errors: 'Maximum latitude is invalid'
+            })
+        } else {
+            where.lat = {
+                [Op.lte]: Number(maxLat)
+            }
+        }
+    }
+
+    if (minLat !== undefined) {
+        if (Number(minLat) % 1 === 0) {
+            res.status(400)
+            return res.json({
+                message: 'Bad Request',
+                errors: 'Minimum latitude is invalid'
+            })
+        } else {
+            where.lat = {
+                [Op.gte]: Number(minLat)
+            }
+        }
+    }
+
+    if (minLng !== undefined) {
+        if (Number(minLng) % 1 === 0) {
+            res.status(400)
+            return res.json({
+                message: 'Bad Request',
+                errors: 'Minimum latitude is invalid'
+            })
+        } else {
+            where.lng = {
+                [Op.gte]: Number(minLng)
+            }
+        }
+    }
+
+    if (maxLng !== undefined) {
+        if (Number(maxLng) % 1 === 0) {
+            res.status(400)
+            return res.json({
+                message: 'Bad Request',
+                errors: 'Minimum latitude is invalid'
+            })
+        } else {
+            where.lng = {
+                [Op.lte]: Number(maxLng)
+            }
+        }
+    }
+
+    if (minPrice !== undefined) {
+        if (Number(minPrice) < 0) {
+            return res.json({
+                message: 'Bad Request',
+                errors: 'Minimum price must be greater than or equal to 0'
+            })
+        } else {
+            where.price = {
+                [Op.gte]: Number(minPrice)
+            }
+        }
+    }
+
+    if (maxPrice !== undefined) {
+        if (Number(maxPrice) < 0) {
+            return res.json({
+                message: 'Bad Request',
+                errors: 'Maximum price must be greater than or equal to 0'
+            })
+        } else {
+            where.price = {
+                [Op.lte]: Number(maxPrice)
+            }
+        }
     }
 
     const allSpots = await Spot.findAll({
         include: [
             {model: Review},
-            {model: SpotImage}
+            {model: SpotImage, as: 'previewImage'}
         ],
+        ...pagination
     });
 
     let Spots = [];
@@ -447,11 +571,14 @@ router.get('/', async (req, res) => {
     });
 
     Spots.forEach(spot =>{
-        spot.SpotImages.forEach(e =>{
-            if(e.preview === true){
-                spot.previewImage = e.url;
-            }
+        if (spot.SpotImages) {
+            spot.SpotImages.forEach(e =>{
+                if(e.preview === true){
+                    spot.previewImage = e.url;
+                }
+            
         });
+        }
         if(!spot.previewImage){
             spot.previewImage = 'No preview image found';
         }
