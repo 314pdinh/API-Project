@@ -18,22 +18,29 @@ router.get('/current', requireAuth, async (req, res) => {
           include: [ 
               { 
                 model: SpotImage,
-                as: "previewImage",
-                attributes: [ "url" ],
                 where: { preview: true },
-                required: false,
               }
           ]
       }]
   })
 
-  const newArra = allBookings.map(booking => {
-    const { Spot } = booking;
-    const previewImage = Spot?.SpotImages?.[0]?.url || null;
-    delete Spot?.SpotImages;
-    Spot.previewImage = previewImage;
-    return booking.toJSON();
-  });
+
+  const arra = []
+
+  allBookings.forEach(ele => {
+      arra.push(ele.toJSON())
+  })
+
+  const newArra = []
+  arra.forEach(booking => {
+
+      booking.Spot.SpotImages.forEach(ele => {
+          booking.Spot.previewImage = ele.url
+      })
+
+      delete booking.Spot.SpotImages
+      newArra.push(booking)
+  })
   
   return res.status(200).json({ Bookings: newArra });
 })

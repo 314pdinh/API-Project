@@ -36,16 +36,6 @@ module.exports = {
         preview: false
       },
       {
-        spotId: 1,
-        url: 'https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ',
-        preview: false
-      },
-      {
-        spotId: 1,
-        url: 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g',
-        preview: true
-      },
-      {
         spotId: 2,
         url: 'https://media.cntraveler.com/photos/63482b255e7943ad4006df0b/1:1/w_1280%2Ch_1280%2Cc_limit/tokyoGettyImages-1031467664.jpeg',
         preview: true
@@ -61,16 +51,6 @@ module.exports = {
         preview: true
       },
       {
-        spotId: 2,
-        url: 'https://fastly.picsum.photos/id/28/4928/3264.jpg?hmac=GnYF-RnBUg44PFfU5pcw_Qs0ReOyStdnZ8MtQWJqTfA',
-        preview: false
-      },
-      {
-        spotId: 2,
-        url: 'https://fastly.picsum.photos/id/49/1280/792.jpg?hmac=NnUJy0O9-pXHLmY2loqVs2pJmgw9xzuixgYOk4ALCXU',
-        preview: true
-      },
-      {
         spotId: 3,
         url: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/0c/ea/bb/ottawa-city-view.jpg?w=500&h=300&s=1',
         preview: true
@@ -83,16 +63,6 @@ module.exports = {
       {
         spotId: 3,
         url: 'https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0',
-        preview: true
-      },
-      {
-        spotId: 3,
-        url: 'https://fastly.picsum.photos/id/30/1280/901.jpg?hmac=A_hpFyEavMBB7Dsmmp53kPXKmatwM05MUDatlWSgATE',
-        preview: false
-      },
-      {
-        spotId: 3,
-        url: 'https://fastly.picsum.photos/id/33/5000/3333.jpg?hmac=h5NVRcUXmsWm612YQOroHSA5n9R7gxZgoP60LHBPHtw',
         preview: true
       },
     ], {})
