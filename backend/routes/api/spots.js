@@ -319,33 +319,36 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 })
 
 // Get all Bookings for a Spot based on the Spot's id
-router.get('/:spotId/bookings', requireAuth, async (req, res) => {
-  const { user } = req;
-  const spotId = req.params.spotId;
 
-  const spot = await Spot.findByPk(spotId);
-  if (!spot) {
-    return res.status(404).json({ message: "Spot couldn't be found" });
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+  const { user } = req
+  const spotId = await Spot.findByPk(req.params.spotId)
+
+  if (!spotId) {
+      return res.status(404).json({ message: "Spot couldn't be found" })
   }
 
-  const bookings = await Booking.findAll({
-    where: { spotId: spotId },
-    include: spot.ownerId === user.id
-      ? { model: User, attributes: ['id', 'firstName', 'lastName'] }
-      : undefined
-  });
-
-  if (spot.ownerId === user.id) {
-    return res.status(200).json({ Bookings: bookings });
+  if (user.id !== spotId.ownerId) {
+      const bookings = await Booking.findAll({
+          where: {
+              spotId: req.params.spotId
+          },
+          attributes: ['spotId', 'startDate', 'endDate']
+      })
+      return res.status(200).json({ Bookings: bookings })
   } else {
-    const simplifiedBookings = bookings.map(booking => ({
-      spotId: booking.spotId,
-      startDate: booking.startDate,
-      endDate: booking.endDate
-    }));
-    return res.status(200).json({ Bookings: simplifiedBookings });
+      const bookings = await Booking.findAll({
+          where: {
+              spotId: req.params.spotId
+          },
+          include: [{
+              model: User,
+              attributes: ['id', 'firstName', 'lastName']
+          }]
+      })
+      return res.status(200).json({ Bookings: bookings })
   }
-});
+})
 
 
 // IN PROGRESS ******************************
