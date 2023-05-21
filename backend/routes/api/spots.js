@@ -6,45 +6,48 @@ const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = requi
 
 // Get all Spots owned by the Current User 
 router.get('/current', requireAuth, async (req, res, next) => {
-    const { user } = req;
-    const allSpots = await Spot.findAll({
-    where : {ownerId : user.id},
-    include: [
-        { model: Review },
-        { model: SpotImage }
-    ]
-    });
+  const { user } = req;
+  const allSpots = await Spot.findAll({
+  where : {ownerId : user.id},
+  include: [
+      { model: Review },
+      { model: SpotImage }
+  ]
+  });
 
-    let Spots = [];
-    allSpots.forEach(spot =>{
-        Spots.push(spot.toJSON());
-    });
-
-    Spots.forEach(spot => {
+  let Spots = [];
         let sum = 0;
-        spot.Reviews.forEach(e =>{
-            sum += e.stars;
-        });
-        spot.avgRating = sum / spot.Reviews.length;
-        delete spot.Reviews;
-    });
 
-    Spots.forEach(spot =>{
-        spot.SpotImages.forEach(e =>{
-            if(e.preview === true){
-                spot.previewImage = e.url;
-            }
-        });
-        if(!spot.previewImage){
-            spot.previewImage = 'No preview image found';
-        }
-        delete spot.SpotImages;
-        spot.price = parseFloat(spot.price);
-        spot.lng = parseFloat(spot.lng);
-        spot.lat = parseFloat(spot.lat);
-    });
+  allSpots.forEach(spot =>{
+      Spots.push(spot.toJSON());
+  });
 
-    return res.status(200).json({Spots});
+  Spots.forEach(spot => {
+      spot.Reviews.forEach(e =>{
+          sum += e.stars;
+      });
+      spot.avgRating = sum / spot.Reviews.length;
+      delete spot.Reviews;
+  });
+
+
+
+  Spots.forEach(spot =>{
+      spot.SpotImages.forEach(e =>{
+          if(e.preview === true){
+              spot.previewImage = e.url;
+          }
+      });
+      if(!spot.previewImage){
+          spot.previewImage = 'No preview image found';
+      }
+      delete spot.SpotImages;
+      spot.price = parseFloat(spot.price);
+      spot.lng = parseFloat(spot.lng);
+      spot.lat = parseFloat(spot.lat);
+  });
+
+  return res.status(200).json({Spots});
 });
 
 // Get details of a Spot from an id
@@ -53,6 +56,7 @@ router.get('/:spotId', async (req, res, next) => {
         include: [
             {
                 model: SpotImage,
+                // as: 'previewImage', // Specify the alias for the association
                 attributes: ['id', 'url', 'preview']
             },
             {
@@ -316,35 +320,33 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 
 // Get all Bookings for a Spot based on the Spot's id
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
-    const { user } = req;
-    const spotId = req.params.spotId;
+  const { user } = req;
+  const spotId = req.params.spotId;
 
-    // Check if the spot exists
-    const spot = await Spot.findByPk(spotId);
-    if (!spot) {
-        return res.status(404).json({ message: "Spot couldn't be found" });
-    }
+  const spot = await Spot.findByPk(spotId);
+  if (!spot) {
+    return res.status(404).json({ message: "Spot couldn't be found" });
+  }
 
-    // Check if the user is the owner of the spot
-    if (spot.ownerId === user.id) {
-        // If user is the owner, return bookings with user information
-        const bookings = await Booking.findAll({
-            where: { spotId: spotId },
-            include: {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            }
-        });
-        return res.status(200).json({ Bookings: bookings });
-    } else {
-        // If user is not the owner, return bookings without user information
-        const bookings = await Booking.findAll({
-            where: { spotId: spotId },
-            attributes: ['spotId', 'startDate', 'endDate']
-        });
-        return res.status(200).json({ Bookings: bookings });
-    }
+  const bookings = await Booking.findAll({
+    where: { spotId: spotId },
+    include: spot.ownerId === user.id
+      ? { model: User, attributes: ['id', 'firstName', 'lastName'] }
+      : undefined
+  });
+
+  if (spot.ownerId === user.id) {
+    return res.status(200).json({ Bookings: bookings });
+  } else {
+    const simplifiedBookings = bookings.map(booking => ({
+      spotId: booking.spotId,
+      startDate: booking.startDate,
+      endDate: booking.endDate
+    }));
+    return res.status(200).json({ Bookings: simplifiedBookings });
+  }
 });
+
 
 // IN PROGRESS ******************************
 // Create a Booking from a Spot based on the Spot's id
