@@ -5,46 +5,42 @@ const { Op } = require('sequelize');
 const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = require('../../db/models');
 
 // Get all of the Current User's Bookings
-router.get('/current', requireAuth, async (req, res) => {
-  const { user } = req;
-
-  const allBookings = await Booking.findAll({
-      where: {
-          userId: user.id
-      }, 
-      include : [{
+router.get("/current", requireAuth, async function (req, res) {
+    const { user } = req;
+    const bookings = await Booking.findAll({
+      where: { userId: user.id },
+      include: [
+        {
           model: Spot,
-          attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-          include: [ 
-              { 
-                model: SpotImage,
-                where: { preview: true },
-              }
-          ]
-      }]
-  })
-
-
-  const arra = []
-
-  allBookings.forEach(ele => {
-      arra.push(ele.toJSON())
-  })
-
-  const newArra = []
-  arra.forEach(booking => {
-
-      booking.Spot.SpotImages.forEach(ele => {
-          booking.Spot.previewImage = ele.url
-      })
-
-      delete booking.Spot.SpotImages
-      newArra.push(booking)
-  })
+          attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
+        },
+      ],
+    });
   
-  return res.status(200).json({ Bookings: newArra });
-})
-
+    const spotImages = await SpotImage.findAll({
+      where: {
+        preview: true,
+      },
+    });
+    const current = bookings.map(function (booking) {
+      const image = spotImages.find(function (spotImage) {
+        return spotImage.spotId === booking.spotId;
+      });
+  
+      const previewImage = image ? image.url : 'No preview image available';
+  
+      return {
+        ...booking.toJSON(),
+        Spot: {
+          ...booking.Spot.toJSON(),
+          previewImage,
+        },
+      };
+    });
+  
+    res.status(200).json({ Bookings: current });
+  });
+  
   
 // Edit a Booking
 router.put('/:bookingId', requireAuth, async (req, res) => {
