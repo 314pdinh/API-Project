@@ -7,47 +7,39 @@ const { Spot, Review, SpotImage, User, Booking, sequelize, ReviewImage } = requi
 // Get all review of the current user 
 router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
-
-    const allReviews = await Review.findAll({
+    const reviews = await Review.findAll({
+      where: {
+        userId: user.id
+      },
+      include: [
+        { model: User, attributes: ['id', 'firstName', 'lastName'] },
+        { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'] },
+        { model: ReviewImage, attributes: ['id', 'url'] }
+      ]
+    });
+  
+    const newReviews = [];
+    for (const review of reviews) {
+      const newReview = review.toJSON();
+      const spot = await Spot.findOne({
         where: {
-            userId: user.id
-        }, 
-        include: [
-            {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName']
-            },
-            {
-            model: Spot,
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price',],
-            include: [
-                {
-                    model: SpotImage,
-                }
-            ]
-            }, {
-                model: ReviewImage, 
-                attributes: ['id', 'url']
-            }
-        ]
-    })
+          id: newReview.spotId
+        }
+      });
+      const spotImages = await spot.getSpotImages();
+  
+      for (const spotImage of spotImages) {
+        const newSpotImage = spotImage.toJSON();
+  
+        newReview.Spot.previewImage = newSpotImage.preview ? newSpotImage.url : 'No preview image available';
+  
+        newReviews.push(newReview);
+      }
+    }
+  
+    res.status(200).json({ Reviews: newReviews });
+  });
 
-    const arra = [];
-    allReviews.forEach(e => {
-        arra.push(e.toJSON())
-    })
-
-    const newArra = [];
-    arra.forEach( review => {
-        review.Spot.SpotImages.forEach( rev => {
-            review.Spot.previewImage = rev.url
-        })
-        delete review.Spot.SpotImages;
-        newArra.push(review);
-    })
-
-    return res.status(200).json({ Reviews: newArra });
-})
 
 // Add an Image to a Review based on the Review's ID
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
