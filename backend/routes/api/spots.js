@@ -427,8 +427,9 @@ router.get('/', async (req, res) => {
     const errors = {};
     let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
   
-    page = parseInt(page);
-    size = parseInt(size);
+    page = page ? parseInt(page) : 1;
+    size = size ? parseInt(size) : 20;
+  
   
     if (isNaN(page) || page < 1 || page > 10) {
       errors.page = 'Page must be between 1 and 10';
@@ -470,7 +471,6 @@ router.get('/', async (req, res) => {
     }
   
     const where = {};
-  
     if (maxLat !== undefined) {
       where.lat = {
         [Op.lte]: parseFloat(maxLat)
@@ -551,5 +551,6 @@ router.get('/', async (req, res) => {
       });
   });
   
+
 
 module.exports = router
