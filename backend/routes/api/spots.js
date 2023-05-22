@@ -512,11 +512,10 @@ router.get('/', async (req, res) => {
       offset: size * (page - 1)
     };
   
-    try {
       const allSpots = await Spot.findAll({
         include: [
           { model: Review },
-          { model: SpotImage, as: 'previewImage' }
+          { model: SpotImage }
         ],
         where: where,
         ...pagination
@@ -550,11 +549,6 @@ router.get('/', async (req, res) => {
         page: page,
         size: size
       });
-    } catch (error) {
-      return res.status(500).json({
-        message: 'Internal Server Error'
-      });
-    }
   });
   
 
