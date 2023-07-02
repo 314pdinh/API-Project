@@ -16,8 +16,8 @@ const Spots = () => {
   const renderSpots = () =>
     allSpots.map((spot) => (
       <NavLink key={spot.id} to={`/spots/${spot.id}`}>
-        <div className="ind-spot">
-          <img id="spot-img" src={spot.previewImage} alt="img" />
+        <div className="each-spot">
+          <img id="spot-image" src={spot.previewImage} alt="img" />
           <div className="review">
             <b>★ {spot.avgRating}</b>
           </div>

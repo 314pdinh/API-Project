@@ -21,15 +21,15 @@ module.exports = {
    await queryInterface.bulkInsert(options, [
     {
       reviewId: 1,
-      url: 'https://www.travelandleisure.com/thmb/91pb8LbDAUwUN_11wATYjx5oF8Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/new-york-city-evening-NYCTG0221-52492d6ccab44f328a1c89f41ac02aea.jpg'
+      url: 'https://fastly.picsum.photos/id/806/200/300.jpg?hmac=IA-MNmLr1ua-cWJTayRkIMVB9ZU-DrSrJUB_8gi-Xpw'
     },
     {
       reviewId: 2,
-      url: 'https://upload.wikimedia.org/wikipedia/commons/9/96/ISH_WC_Boston4.jpg'
+      url: 'https://fastly.picsum.photos/id/1038/200/300.jpg?hmac=YkU1czWdP8PVibbjnh2YFlQZVnacHSntbpt41mgiXGU'
     },
     {
       reviewId: 3,
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/LA_Downtown_View_%28cropped%29.jpg/800px-LA_Downtown_View_%28cropped%29.jpg'
+      url: 'https://fastly.picsum.photos/id/827/200/300.jpg?hmac=0Q7y5JGXuxSXgO7VUvdNhXC4yoAupOJiKmRS9RoPqs8'
     },
     {
       reviewId: 4,
@@ -38,7 +38,23 @@ module.exports = {
     {
       reviewId: 5,
       url: 'https://fastly.picsum.photos/id/46/3264/2448.jpg?hmac=ZHE8nk-Q9uRp4MxgKNvN7V7pYFvA-9BCv99ltY3HBv4'
-    }
+    },
+    {
+      reviewId: 6,
+      url: 'https://fastly.picsum.photos/id/136/200/300.jpg?hmac=vOFG2QkF3OUbTp5DRbf7w58YCDVrvf_g5aPFxxTucpU'
+    },
+    {
+      reviewId: 7,
+      url: 'https://fastly.picsum.photos/id/668/200/300.jpg?hmac=E7YE9NQG89nCsmW1hc-1nACBZTj9ll8IiXS65WjdD28'
+    },
+    {
+      reviewId: 8,
+      url: 'https://fastly.picsum.photos/id/1068/200/300.jpg?hmac=ICIwYXRGTpDxBPZAI7V8YxGtBBanV8Dfbe_DLNKtYcE'
+    },
+    {
+      reviewId: 9,
+      url: 'https://fastly.picsum.photos/id/974/200/300.jpg?hmac=QEuRqsjG8spkqu72dWfkl4m-kSl5p-CEfHgx9dnnZLo'
+    },
    ], {})
   },
 
