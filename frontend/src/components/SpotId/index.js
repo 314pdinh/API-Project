@@ -31,7 +31,7 @@ const SpotId = () => {
             </p>
           </div>
           <div className="image-container">
-
+          <img id='image-cover' src={oneSpot.SpotImages[4].url}/>
             <div className="image-grid">
               {oneSpot.SpotImages.slice(0, 4).map((image, index) => (
                 <img

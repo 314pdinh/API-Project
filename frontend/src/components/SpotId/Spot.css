@@ -12,6 +12,10 @@
     margin-left: 50px;
 }
 
+#image-cover {
+    height: 500px;
+}
+
 .image-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
