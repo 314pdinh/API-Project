@@ -5,7 +5,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import Spots from './components/SpotPage';
-import SpotId from './components/SpotId'
+import SpotId from './components/SpotId';
+import NewSpot from './components/SpotNew';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Spots />
+          </Route>
+          <Route path='/spots/new'>
+            <NewSpot />
           </Route>
           <Route path='/spots/:spotId'>
             <SpotId />
