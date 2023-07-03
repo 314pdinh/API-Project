@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotThunk, getAllSpotsThunk } from "../../store/spot";
+import SpotIdReview from "./SpotReview";
 import { useParams } from "react-router-dom";
 import "./Spot.css";
 
@@ -31,7 +32,7 @@ const SpotId = () => {
             </p>
           </div>
           <div className="image-container">
-          <img id='image-cover' src={oneSpot.SpotImages[4].url}/>
+            <img id='image-cover' src={oneSpot.SpotImages[4].url} />
             <div className="image-grid">
               {oneSpot.SpotImages.slice(0, 4).map((image, index) => (
                 <img
@@ -64,10 +65,16 @@ const SpotId = () => {
               <div>
                 ${oneSpot.price} night
               </div>
-              <div>★ {oneSpot.avgStarRating}</div>
+              <div>★ {oneSpot.avgStarRating} · {oneSpot.numReviews} reviews</div>
             </div>
             <button id="reserve-button">Reserve</button>
           </div>
+        </div>
+        <div className="reviews-container">
+          <div className="reviews-section">
+            <div>★ {oneSpot.avgStarRating} · {oneSpot.numReviews} reviews</div>
+          </div>
+          <SpotIdReview spotId={spotId} />
         </div>
       </>
     )

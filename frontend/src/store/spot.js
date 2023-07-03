@@ -1,13 +1,13 @@
 import { csrfFetch } from './csrf';
 
-// Action Types
+// TYPE
 const GET_ALL_SPOTS = 'spot/getAllSpots';
 
 const GET_SPOT = 'spot/getSpot';
 
 const CREATE_SPOT = 'spot/createSpot';
 
-// Action Creators
+// ACTION CREATORS
 const getAllSpots = (spots) => ({
   type: GET_ALL_SPOTS,
   spots
@@ -24,7 +24,7 @@ const createSpot = (spot) => ({
 })
 
 
-// Thunk Action
+// THUNK ACTION CREATORS
 export const getAllSpotsThunk = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots');
 
@@ -66,7 +66,7 @@ const initialState = {
   singleSpot: { SpotImages: [] }
 };
 
-// Reducer
+// REDUCER
 const spotReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_SPOTS: {
@@ -107,8 +107,6 @@ const spotReducer = (state = initialState, action) => {
       return newState;
     }
 
-
-    
     default:
       return state;
   }
