@@ -1,3 +1,25 @@
 .hidden {
     display: none;
 }
+
+.nav-container {
+    position: relative;
+    border-bottom: 0.2px solid rgb(189, 188, 188);
+    margin-bottom: 2em;
+}
+
+.nav-Bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+.Home-Button {
+    font-size: 2em;
+}
+
+#profile-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+}

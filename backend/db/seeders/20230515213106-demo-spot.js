@@ -18,8 +18,8 @@ module.exports = {
       country: 'United States',
       lat: 37.7641234,
       lng: 10.1508180,
-      name: 'Too',
-      description: 'To be decided',
+      name: 'Red',
+      description: "Welcome to my Star Wars-themed Airbnb! As your host, I'll guide you through an immersive experience in a galaxy far, far away.",
       price: 299.99
     },
     {
@@ -30,8 +30,8 @@ module.exports = {
       country: 'United States',
       lat: 79.7797794,
       lng: 10.2000009,
-      name: 'Too LOVELY',
-      description: 'Orangey',
+      name: 'Yellow',
+      description: "Step into the cantina of my Star Wars-themed Airbnb, where you'll be greeted by the vibrant and diverse atmosphere of the galaxy.",
       price: 199.99
     },
     {
@@ -42,8 +42,8 @@ module.exports = {
       country: 'United States',
       lat: 33.7242424,
       lng: 10.1242428,
-      name: 'Too hot',
-      description: 'To be VERY humid',
+      name: 'Blue',
+      description: "Calling all Jedi and Sith! Prepare to embark on an unforgettable adventure in my Star Wars-inspired Airbnb.",
       price: 299.99
     },
     {
@@ -54,8 +54,8 @@ module.exports = {
       country: 'United States',
       lat: 65.7179091,
       lng: 83.1401821,
-      name: 'Beautiful',
-      description: 'Free boat rides',
+      name: 'Green',
+      description: "Welcome to your own private starship! My Star Wars-themed Airbnb offers a unique experience where you can stay in a replica of the Millennium Falcon.",
       price: 524.99
     },
     {
@@ -66,8 +66,8 @@ module.exports = {
       country: 'United States',
       lat: 94.7258580,
       lng: 12.1402455,
-      name: 'Magnificient',
-      description: 'Sunset amazing!',
+      name: 'White',
+      description: "Feel like royalty in my Star Wars-inspired palace! The grandeur and elegance of Naboo are replicated in every detail of this Airbnb.",
       price: 424.99
     },
     {
@@ -79,7 +79,7 @@ module.exports = {
       lat: 55.7133491,
       lng: 63.2320131,
       name: 'Purple',
-      description: 'Taro',
+      description: "Looking for an otherworldly retreat? Look no further than my Jedi Temple-inspired Airbnb.",
       price: 399.99
     },
     {
@@ -90,8 +90,8 @@ module.exports = {
       country: 'United States',
       lat: 34.1747199,
       lng: 81.1794792,
-      name: 'Hot',
-      description: 'Great foods!',
+      name: 'Cyan',
+      description: "Attention, rebels and freedom fighters! This Rebel Alliance-themed Airbnb is your secret hideout in the heart of the galaxy.",
       price: 99.99
     },
     {
@@ -102,8 +102,8 @@ module.exports = {
       country: 'United States',
       lat: 34.1227199,
       lng: 21.1332792,
-      name: 'cold',
-      description: 'Cold foods!',
+      name: 'Pink',
+      description: "Welcome, scoundrels and smugglers, to my Star Wars underworld-inspired Airbnb!",
       price: 49.99
     },
     {
@@ -114,8 +114,8 @@ module.exports = {
       country: 'United States',
       lat: 44.1722299,
       lng: 33.1990092,
-      name: 'Blue',
-      description: 'Blue Sky green foods!',
+      name: 'Gold',
+      description: "Join fellow guests for lively discussions about the Force or engage in lightsaber duels.",
       price: 99.99
     },
    ], {})

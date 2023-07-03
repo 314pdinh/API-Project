@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -41,7 +42,15 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <div className="new-spot-link">
+        <div>
+          <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>
+            Create a New Spot
+          </NavLink>
+        </div>
+      </div>
+      
+      <button onClick={openMenu} id='profile-button'>
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>

@@ -1,0 +1,49 @@
+.title {
+    margin-left: 50px;
+}
+
+.each-image {
+    height: 250px;
+    width: 250px;
+}
+
+.image-container {
+    display: flex;
+    margin-left: 50px;
+}
+
+#image-cover {
+    height: 500px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.description-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Host-description {
+    margin-left: 50px;
+}
+
+.booking-description {
+    border: 1px solid black;
+    margin-right: 50px;
+    padding: 25px 10px;
+}
+
+.pricenstar {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+#reserve-button {
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 0 60px;
+}
