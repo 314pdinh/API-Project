@@ -13,26 +13,24 @@ const Spots = () => {
     dispatch(getAllSpotsThunk());
   }, [dispatch]);
 
-  const renderSpots = () =>
-    allSpots.map((spot) => (
-      <NavLink key={spot.id} to={`/spots/${spot.id}`}>
-        <div className="each-spot">
-          <img id="spot-image" src={spot.previewImage} alt="img" />
-          <div className="review">
-            <b>★ {spot.avgRating.toFixed(1)}</b>
-          </div>
-          <div className="city">{spot.city}, {spot.state}</div>
-          <div className="country">{spot.country}</div>
-          <div className="price">
-            <b>${spot.price}</b> night
-          </div>
-        </div>
-      </NavLink>
-    ));
-
   return (
     <div className="spots-container">
-      {renderSpots()}
+      {allSpots.map((spot) => (
+        <NavLink key={spot.id} to={`/spots/${spot.id}`}>
+          <div className="each-spot">
+            <img id="spot-image" src={spot.previewImage} alt="img" />
+            <div className="review">
+              <b>★ {spot.avgRating.toFixed(1)}</b>
+            </div>
+            <div className="city">{spot.city}, {spot.state}</div>
+            <div className="country">{spot.country}</div>
+            <div className="price">
+              <b>${spot.price}</b> night
+            </div>
+          </div>
+        </NavLink>
+      ))
+    }
     </div>
   );
 };
