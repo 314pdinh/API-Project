@@ -65,14 +65,14 @@ const SpotId = () => {
               <div>
                 ${oneSpot.price} night
               </div>
-              <div>★ {oneSpot.avgStarRating} · {oneSpot.numReviews} reviews</div>
+              <div>★ {oneSpot.avgStarRating.toFixed(1)} · {oneSpot.numReviews} reviews</div>
             </div>
             <button id="reserve-button">Reserve</button>
           </div>
         </div>
         <div className="reviews-container">
           <div className="reviews-section">
-            <div>★ {oneSpot.avgStarRating} · {oneSpot.numReviews} reviews</div>
+            <div>★ {oneSpot.avgStarRating.toFixed(1)} · {oneSpot.numReviews} reviews</div>
           </div>
           <SpotIdReview spotId={spotId} />
         </div>
