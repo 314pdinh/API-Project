@@ -19,7 +19,7 @@ const Spots = () => {
         <div className="each-spot">
           <img id="spot-image" src={spot.previewImage} alt="img" />
           <div className="review">
-            <b>★ {spot.avgRating}</b>
+            <b>★ {spot.avgRating.toFixed(1)}</b>
           </div>
           <div className="city">{spot.city}, {spot.state}</div>
           <div className="country">{spot.country}</div>
