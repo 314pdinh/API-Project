@@ -17,15 +17,24 @@ const Spots = () => {
     <div className="spots-container">
       {allSpots.map((spot) => (
         <NavLink key={spot.id} to={`/spots/${spot.id}`}>
-          <div className="each-spot">
+          <div className="spot-card">
             <img id="spot-image" src={spot.previewImage} alt="img" />
+
             <div className="review">
               <b>★ {spot.avgRating.toFixed(1)}</b>
             </div>
-            <div className="city">{spot.city}, {spot.state}</div>
-            <div className="country">{spot.country}</div>
+            <div className="locationPrice">
+
+            <div className="city" >
+              
+              {spot.city}, {spot.state}
+            
+            </div>
+            {/* <div className="country">{spot.country}</div> */}
             <div className="price">
-              <b>${spot.price}</b> night
+              <b>${spot.price}</b>night
+            </div>
+
             </div>
           </div>
         </NavLink>

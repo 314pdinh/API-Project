@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotThunk, getAllSpotsThunk } from "../../store/spot";
+import { getReviewsThunk } from "../../store/review";
 import SpotIdReview from "./SpotReview";
 import { useParams } from "react-router-dom";
 import "./Spot.css";
@@ -10,12 +11,15 @@ const SpotId = () => {
   const { spotId } = useParams();
   const oneSpot = useSelector((state) => state.spots.singleSpot);
   const [isLoaded, setIsLoaded] = useState(false);
+  const spotReview = useSelector((state) => state.reviews.spot);
+  const reviewId = Object.values(spotReview);
 
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getSpotThunk(spotId));
       await dispatch(getAllSpotsThunk());
       setIsLoaded(true);
+      await dispatch(getReviewsThunk(spotId));
     };
 
     fetchData();

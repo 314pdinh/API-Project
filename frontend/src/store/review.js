@@ -41,6 +41,7 @@ export const postReviewsThunk = (review, spotId) => async (dispatch) => {
     if (response.ok) {
         const review = await response.json()
         dispatch(postReview(review))
+        dispatch(getReviewsThunk(spotId))
         return review
     };
 };
