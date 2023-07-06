@@ -35,7 +35,7 @@ const PostReview = ({ spotId }) => {
       };
 
       await dispatch(postReviewsThunk(payload, spotId));
-      history.push(`/spots/${spotId}`);
+      await dispatch(getSpotThunk(spotId));
       closeModal();
     }
   };
@@ -56,7 +56,7 @@ const PostReview = ({ spotId }) => {
   };
 
   return (
-    <div className="create-review-modal">
+    <div className="post-review-form">
       <h3>How was your stay?</h3>
       <form onSubmit={onSubmit}>
         <label>

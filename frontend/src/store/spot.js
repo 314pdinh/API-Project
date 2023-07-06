@@ -13,14 +13,14 @@ const getAllSpots = (spots) => ({
   spots
 });
 
-const getSpot= (spot) => ({
+const getSpot = (spot) => ({
   type: GET_SPOT,
   spot
 })
 
-const createSpot = (spot) => ({
+export const createSpot = (newSpot) => ({
   type: CREATE_SPOT,
-  spot
+  newSpot
 })
 
 
@@ -45,7 +45,8 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
   }
 }
 
-export const createSpotThunk = (spot) => async (dispatch) => {
+export const createSpotThunk = (spot, image) => async (dispatch) => {
+
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -53,12 +54,30 @@ export const createSpotThunk = (spot) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const spot = await response.json();
-    dispatch(createSpot(spot));
-    return spot;
+    const newSpot = await response.json();
+    dispatch(createSpotImagesThunk(newSpot, image));
+    return newSpot;
   }
-}
 
+};
+
+export const createSpotImagesThunk = (newSpotId, images) => async (dispatch) => {
+  for (const image of images) {
+    const imageResponse = await csrfFetch(`/api/spots/${newSpotId.id}/images`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(image),
+    });
+
+    if (imageResponse.ok) {
+      const newImage = await imageResponse.json();
+      newSpotId.previewImage = newImage.url;
+      dispatch(createSpot(newSpotId));
+      return newSpotId;
+
+    } 
+  }
+};
 
 // Initial State
 const initialState = {
@@ -74,9 +93,9 @@ const spotReducer = (state = initialState, action) => {
       action.spots.forEach((spot) => {
         allSpots[spot.id] = spot;
       });
-      return { 
-        ...state, 
-        allSpots 
+      return {
+        ...state,
+        allSpots
       };
     }
 
@@ -93,7 +112,7 @@ const spotReducer = (state = initialState, action) => {
         singleSpot: updatedSingleSpot,
       };
     }
-    
+
     case CREATE_SPOT: {
       const singleSpot = { ...action.spot };
       const newState = {
@@ -106,6 +125,8 @@ const spotReducer = (state = initialState, action) => {
       };
       return newState;
     }
+
+
 
     default:
       return state;

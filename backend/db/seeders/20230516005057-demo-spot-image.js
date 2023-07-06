@@ -168,7 +168,7 @@ module.exports = {
       {
         spotId: 6,
         url: 'https://fastly.picsum.photos/id/933/200/300.jpg?hmac=8zdipGWKGkHz8wyA9J63P3fzghuUL9wqV5Y34b8mLTI',
-        preview: false
+        preview: true
       },
       {
         spotId: 7,
