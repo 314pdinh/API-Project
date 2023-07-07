@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DeleteReview from "../DeleteReview";
+import DeleteReview from "../ReviewDelete";
 import OpenModalMenuItem from '../OpenModalButton';
 
 const SpotReviews = ({ spot, newReviewList, userReview, userId }) => {

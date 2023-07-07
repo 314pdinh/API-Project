@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewsThunk, getCurrentUserReviewThunk } from '../../store/review';
 import OpenModalMenuItem from '../OpenModalButton';
-import DeleteReview from "../DeleteReview";
-import UpdateReviewForm from "../UpdateReview";
+import DeleteReview from "../ReviewDelete";
+import UpdateReviewForm from "../ReviewUpdate";
 
 function ManageReviews() {
   const dispatch = useDispatch();

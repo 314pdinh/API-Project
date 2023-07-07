@@ -9,10 +9,11 @@ const CreateForm = () => {
         address: '',
         city: '',
         state: '',
+        lat: '',
+        lng: '',
         description: '',
         name: '',
         price: '',
-        // image: '',
     };
 
     const history = useHistory();
@@ -20,10 +21,12 @@ const CreateForm = () => {
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
+    const [latitude, setLatitude] = useState(1);
+    const [longitude, setLongitude] = useState(1);
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [image, setImage] = useState('');
+    const [prevImage, setPrevImage] = useState('');
     const [img1, setImg1] = useState('');
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
@@ -31,18 +34,19 @@ const CreateForm = () => {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
 
+
+    const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png';
+
     const SpotImages = [
-        { preview: true, url: image },
+        { preview: true, url: prevImage },
         { preview: false, url: img1 },
         { preview: false, url: img2 },
         { preview: false, url: img3 },
-        { preview: false, url: img4 }]
-
-    SpotImages.forEach((image) => {
-        if (image.url === '') {
-            image.url = 'https://t4.ftcdn.net/jpg/05/07/58/41/360_F_507584110_KNIfe7d3hUAEpraq10J7MCPmtny8EH7A.jpg'
-        }
-    })
+        { preview: false, url: img4 },
+    ].map(image => ({
+        ...image,
+        url: image.url || defaultImage,
+    }));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,6 +56,8 @@ const CreateForm = () => {
             address: street,
             city,
             state,
+            lat: latitude,
+            lng: longitude,
             description,
             name,
             price,
@@ -71,6 +77,12 @@ const CreateForm = () => {
         if (!state) {
             errors.state = 'State is required'
         }
+        if (!latitude) {
+            errors.latitude = 'Latitude is required'
+        }
+        if (!longitude) {
+            errors.longitude = 'Longitude is required'
+        }
         if (!description || description.length < 30) {
             errors.description = 'Description needs a minimum of 30 characters'
         }
@@ -81,11 +93,11 @@ const CreateForm = () => {
             errors.price = 'Price is required'
         }
 
-        if (!image) {
+        if (!prevImage) {
             errors.previewImage = 'Preview Image is required'
         }
-        if (image && !(image.endsWith('.png') || image.endsWith('.jpg') || image.endsWith('.jpeg'))) {
-            errors.image = 'Image URL must end with .png, .jpg, or .jpeg'
+        if (prevImage && !(prevImage.endsWith('.png') || prevImage.endsWith('.jpg') || prevImage.endsWith('.jpeg'))) {
+            errors.prevImage = 'Image URL must end with .png, .jpg, or .jpeg'
         }
         if (img1 && !(img1.endsWith('.png') || img1.endsWith('.jpg') || img1.endsWith('.jpeg'))) {
             errors.img1 = 'Image URL must end with .png, .jpg, or .jpeg'
@@ -121,7 +133,7 @@ const CreateForm = () => {
                     <label>
                         <div className='flex'>
                             Country
-                            <br></br>
+                            <br />
                             <div className='errors'>{errors.country}</div>
                         </div>
                         <input
@@ -173,8 +185,44 @@ const CreateForm = () => {
                             />
                         </label>
                     </div>
+                    <div className='lat'>
+                        <label>
+                            <div className='flex'>
+                                Latitude
+                                <div className='errors'>{errors.latitude}</div>
+                            </div>
+                            <div className='lat-input'>
+                                <div className='comma'>
+                                    <input
+                                        type='number'
+                                        placeholder='latitude'
+                                        min='-90'
+                                        max='90'
+                                        value={latitude}
+                                        onChange={(e) => setLatitude(e.target.value)}
+                                    /> ,
+                                </div>
+                            </div>
+                        </label>
+                        <label>
+                            <div className='flex'>
+                                Longitude
+                                <div className='errors'>{errors.longitude}</div>
+                            </div>
+                            <div className='lng-input'>
+                                <input
+                                    type='number'
+                                    placeholder='longitude'
+                                    min='-180'
+                                    max='180'
+                                    value={longitude}
+                                    onChange={(e) => setLongitude(e.target.value)}
+                                />
+                            </div>
+                        </label>
+                    </div>
                 </div>
-                <div className='descript'>
+                <div className='description-box'>
                     <h3>Describe your place to guests</h3>
                     <h6>Mention the best features of your space, any special amentities like
                         fast wif or parking, and what you love about the neighborhood.</h6>
@@ -207,7 +255,6 @@ const CreateForm = () => {
                                 type='number'
                                 placeholder=' Price per night (USD)'
                                 min='1'
-                                step='1'
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
@@ -221,8 +268,8 @@ const CreateForm = () => {
                     <input
                         type='text'
                         placeholder=" Preview Image URL"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
+                        value={prevImage}
+                        onChange={(e) => setPrevImage(e.target.value)}
                     />
                     <div className='errors'>{errors.previewImage}</div>
                     <div className='errors'>{errors.image}</div>

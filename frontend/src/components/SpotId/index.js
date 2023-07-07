@@ -8,7 +8,7 @@ import SpotImages from "./SpotImages";
 import SpotReviews from "./SpotReview";
 import OpenModalMenuItem from '../OpenModalButton'
 import CreateForm from "../SpotNew";
-import PostReview from "../PostReview";
+import PostReview from "../ReviewPost";
 
 
 const SpotId = () => {
@@ -56,7 +56,7 @@ const SpotId = () => {
   const userReview = newReviewList.find(review => review.userId === userId);
 
   const totalReviews = newReviewList.length;
-  const avgStarRating = spot.avgStarRating.toFixed(1);
+  const avgStarRating = spot && spot.avgStarRating ? spot.avgStarRating.toFixed(1) : 'N/A';
 
   return (
     <section>
