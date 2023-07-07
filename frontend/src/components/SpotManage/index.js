@@ -1,69 +1,68 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpotsThunk } from "../../store/spot";
-import { NavLink } from "react-router-dom";
+import { getAllSpotsThunk, getCurrentUserSpot } from "../../store/spot";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteSpot from "../SpotDelete";
 
-const manageSpot = () => {
+const ManageSpot = () => {
     const dispatch = useDispatch();
-    const spots = useSelector((state) => state.spots);
-    const user = useSelector((state) => state.session.user);
-    const allSpots = Object.values(spots.allSpots);
+    const spotObj = useSelector(state => state.spots.allSpots);
+    const user = useSelector(state => state.session.user);
+    const spotList = Object.values(spotObj);
+    const newList = spotList.filter(spot => spot.ownerId === user.id);
+    const history = useHistory();
 
     useEffect(() => {
-        dispatch(getAllSpotsThunk());
+        dispatch(getCurrentUserSpot());
     }, [dispatch]);
 
-    const usersSpot = allSpots.filter(spot => {
-        return (user.id === spot.ownerId)
-    })
+    const create = () => {
+        history.push('/spots/new');
+    };
+
+    if (!newList) {
+        return null;
+    }
 
     return (
-        <div className="spots-container">
-            <h2>Manage Your Spots</h2>
-            <div id='manage-create-a-newSpot'>
-                <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>
+        <main>
+            <div className="manage">
+                <h1>Manage Your Spots</h1>
+                <button onClick={create}>
                     Create a New Spot
-                </NavLink>
+                </button>
             </div>
-
-            <div className="spot-columns">
-                {usersSpot.map(spot => (
-                    <div key={spot.id}>
-                        <>
-                            <NavLink key={spot.id} to={`/spots/${spot.id}`}>
-                                <div className="each-spot">
-                                    <img id="spot-image" src={spot.previewImage} alt="img" />
-                                    <div className="review">
-                                        <b>★ {spot.avgRating.toFixed(1)}</b>
-                                    </div>
-                                    <div className="city">{spot.city}, {spot.state}</div>
-                                    <div className="country">{spot.country}</div>
-                                    <div className="price">
-                                        <b>${spot.price}</b> night
-                                    </div>
-                                </div>
-                            </NavLink>
-
-                                                        
-                            <div className="Update-Delete">
-                                <NavLink style={{ textDecoration: "none" }} to={`/spots/${spot.id}/`} id="update-Button">
-                                    Update
-                                </NavLink>
-
-                                <OpenModalButton
-                                    buttonText='Delete'
-                                />
+            <ul>
+                {newList.length > 0 && newList.map(spot => (
+                    <div key={spot.id} className="spot">
+                        <Link to={`/spots/${spot.id}`}>
+                            <div className="image">
+                                <img src={spot.previewImage} alt='house' />
                             </div>
-                        </>
+                            <div className='list'>
+                                <div className='star'>
+                                    <li>{spot.city}, {spot.state}</li>
+                                    <li>★ {spot.avgRating}</li>
+                                </div>
+                                <li>${spot.price} night</li>
+                            </div>
+                        </Link>
+                        <div className="buttons">
+                            <button onClick={() => history.push(`/spots/${spot.id}/edit`)}>
+                                Update
+                            </button>
+                            <OpenModalMenuItem
+                                buttonText="Delete"
+                                modalComponent={<DeleteSpot spot={spot} />}
+                            />
+                        </div>
                     </div>
                 ))}
-            </div>
-
-
-
-        </div>
+            </ul>
+        </main>
     );
-};
+}
 
-export default manageSpot;
+export default ManageSpot;
