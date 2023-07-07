@@ -4,84 +4,104 @@ import { getSpotThunk, getAllSpotsThunk } from "../../store/spot";
 import { getReviewsThunk } from "../../store/review";
 import SpotIdReview from "./SpotReview";
 import { useParams } from "react-router-dom";
-import "./Spot.css";
+import SpotImages from "./SpotImages";
+import SpotReviews from "./SpotReview";
+import OpenModalMenuItem from '../OpenModalButton'
+import CreateForm from "../SpotNew";
+import PostReview from "../PostReview";
+
 
 const SpotId = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
-  const oneSpot = useSelector((state) => state.spots.singleSpot);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const spotReview = useSelector((state) => state.reviews.spot);
-  const reviewId = Object.values(spotReview);
+
+  const spot = useSelector(state => state.spots.singleSpot);
+  const userId = useSelector(state => state.session.user && state.session.user.id);
+  const reviewObj = useSelector(state => state.reviews.spot);
+
+  const reviewList = Object.values(reviewObj);
+
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getSpotThunk(spotId));
-      await dispatch(getAllSpotsThunk());
-      setIsLoaded(true);
-      await dispatch(getReviewsThunk(spotId));
-    };
-
-    fetchData();
+    dispatch(getReviewsThunk(spotId));
+    dispatch(getSpotThunk(spotId));
   }, [dispatch, spotId]);
 
-  return (
-    isLoaded && (
-      <>
-        <div className="spotId-container">
-          <div className="title">
-            {oneSpot.name}
-            <p className="spotId-location">
-              {oneSpot.city}, {oneSpot.state}, {oneSpot.country}
-            </p>
-          </div>
-          <div className="image-container">
-            <img id='image-cover' src={oneSpot.SpotImages[4].url} />
-            <div className="image-grid">
-              {oneSpot.SpotImages.slice(0, 4).map((image, index) => (
-                <img
-                  key={index}
-                  className="each-image"
-                  id={
-                    index === 0
-                      ? "top-left"
-                      : index === 1
-                        ? "top-right"
-                        : index === 2
-                          ? "bottom-left"
-                          : "bottom-right"
-                  }
-                  src={image.url}
-                  alt={`image-${index}`}
-                />
-              ))}
-            </div>
+  useEffect(() => {
+    if (!showMenu) return;
 
-          </div>
-        </div>
-        <div className="description-container">
-          <div className="Host-description">
-            Hosted by {oneSpot.Owner.firstName} {oneSpot.Owner.lastName}
-            <p>{oneSpot.description}</p>
-          </div>
-          <div className="booking-description">
-            <div className="pricenstar">
-              <div>
-                ${oneSpot.price} night
+    const closeMenu = (e) => {
+      if (!e.target.closest('.menu-container')) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener('click', closeMenu);
+  }, [showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
+
+  const reserve = () => {
+    window.alert('Feature Coming Soon...');
+  };
+
+  if (!spot || !reviewObj || !spot.Owner) {
+    return null;
+  }
+
+  const newReviewList = reviewList.filter(review => review.spotId === spot.id);
+  const userReview = newReviewList.find(review => review.userId === userId);
+
+  const totalReviews = newReviewList.length;
+  const avgStarRating = spot.avgStarRating.toFixed(1);
+
+  return (
+    <section>
+      <div className='box'>
+        <div className='spot-box'>
+          <h1>{spot.name}</h1>
+          <div className='info'>{spot.city}, {spot.state}, {spot.country}</div>
+          <SpotImages spot={spot} />
+          <div className='reserve-box'>
+            <div className='reserve-wrap'>
+              <div className='host'>
+                <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                <div>{spot.description}</div>
               </div>
-              <div>★ {oneSpot.avgStarRating.toFixed(1)} · {oneSpot.numReviews} reviews</div>
             </div>
-            <button id="reserve-button">Reserve</button>
+            <div className='review'>
+              <div className='reserve'>
+                <div className='money'>
+                  <div>$ {spot.price} night</div>
+                  {totalReviews === 1 ? (
+                    <div>★ {avgStarRating} · {totalReviews} review</div>
+                  ) : (
+                    <div>★ {avgStarRating} · {totalReviews} reviews</div>
+                  )}
+                </div>
+                <button onClick={reserve}>Reserve</button>
+              </div>
+            </div>
           </div>
+          <h1>★ {avgStarRating} · {totalReviews} {totalReviews === 1 ? 'review' : 'reviews'}</h1>
+          <SpotReviews spot={spot} newReviewList={newReviewList} userReview={userReview} userId={userId} />
         </div>
-        <div className="reviews-container">
-          <div className="reviews-section">
-            <div>★ {oneSpot.avgStarRating.toFixed(1)} · {oneSpot.numReviews} reviews</div>
-          </div>
-          <SpotIdReview spotId={spotId} />
+        <div className='new-post'>
+          {userId && !userReview && (
+            <div className='modal'>
+              <OpenModalMenuItem
+                buttonText='Post Your Review'
+                onItemClick={closeMenu}
+                modalComponent={<PostReview spot={spot} />}
+              />
+            </div>
+          )}
         </div>
-      </>
-    )
+      </div>
+    </section>
   );
 };
 

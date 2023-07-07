@@ -14,21 +14,20 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER 
+        type: Sequelize.INTEGER
       },
       spotId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Spots'
-        }
+        references: {model: 'Spots'}
       },
       url: {
-        type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.STRING
       },
       preview: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -40,7 +39,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    }, options)
+    }, options);
   },
 
   async down (queryInterface, Sequelize) {

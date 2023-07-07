@@ -1,78 +1,170 @@
 import { csrfFetch } from './csrf';
 
-// TYPE
-const GET_REVIEW = 'review/getReview';
 
-const POST_REVIEW = 'review/postReview';
+//TYPE 
+export const GET_REVIEWS = 'reviews/GET_REVIEWS';
+export const POST_REVIEW = 'reviews/POST_REVIEW';
+export const GET_CURRENT_USER_REVIEW = 'reviews/GET_CURRENT_USER_REVIEW';
+export const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW';
+export const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
 
-// ACTION CREATORS
-const getReviews = (reviews) => {
-    return {
-        type: GET_REVIEW,
-        reviews
-    };
-};
 
-const postReview = (review) => {
-    return {
-        type: POST_REVIEW,
-        review
-    }
-}
+//ACTION CREATORS
+export const getReviews = (reviews) => ({
+  type: GET_REVIEWS,
+  reviews,
+});
 
-// THUNK ACTION CREATORS
+export const postReview = (review) => ({
+  type: POST_REVIEW,
+  review,
+});
+
+export const getCurrentUserReview = (reviews) => ({
+  type: GET_CURRENT_USER_REVIEW,
+  reviews,
+});
+
+export const updateReview = (review) => ({
+  type: UPDATE_REVIEW,
+  review,
+});
+
+export const deleteReview = (review) => ({
+  type: DELETE_REVIEW,
+  review,
+});
+
+
+//THUNK ACTION CREATORS
 export const getReviewsThunk = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+  const response = await fetch(`/api/spots/${spotId}/reviews`);
 
-    if (response.ok) {
-        const reviews = await response.json()
-        dispatch(getReviews(reviews))
-        return reviews
-    };
+  if (response.ok) {
+    const spotReviews = await response.json();
+    dispatch(getReviews(spotReviews));
+    return spotReviews;
+  }
 };
 
-export const postReviewsThunk = (review, spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(review)
-    })
+export const postReviewThunk = (spot, review, user) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spot.id}/reviews`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(review),
+  });
 
-    if (response.ok) {
-        const review = await response.json()
-        dispatch(postReview(review))
-        dispatch(getReviewsThunk(spotId))
-        return review
-    };
+  if (response.ok) {
+    const spotReview = await response.json();
+    spotReview.User = user;
+    dispatch(postReview(spotReview));
+    return spotReview;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
 };
+
+
+export const getCurrentUserReviewThunk = () => async (dispatch) => {
+  const response = await csrfFetch('/api/reviews/current');
+
+  if (response.ok) {
+    const userReviews = await response.json();
+    dispatch(getCurrentUserReview(userReviews));
+  }
+};
+
+
+export const updateReviewThunk = (review) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${review.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(review),
+  });
+
+  if (response.ok) {
+    const updatedReview = await response.json();
+    dispatch(updateReview(updatedReview));
+    return updatedReview;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
+
+export const deleteReviewThunk = (review) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${review.id}`, {
+    method: 'DELETE',
+  });
+
+  if (response.ok) {
+    dispatch(deleteReview(review));
+    return review;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
+
 
 // INITIAL STATE
-const initialState = { 
-    spot: {}, 
-    user: {} 
-};
+const initialState = { spot: {}, user: {} };
 
 // REDUCER
 const reviewReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case GET_REVIEW: {
-            const updatedState = {...state, spot: {}, user: {}}
-            const reviews = action.reviews.Reviews
-            reviews.forEach(review => updatedState.spot[review.id] = review)
-            return updatedState
-        };
-
-        case POST_REVIEW: {
-            const updatedState = {...state, spot: {...state.spot}, user: {...state.user}}
-            updatedState.spot[action.review.id] = action.review
-            return updatedState
-        };
+  switch (action.type) {
 
 
-        default: 
-            return state;
-    };
+    case GET_REVIEWS: {
+      const spot = { ...state.spot };
+
+      action.reviews.Reviews.forEach(review => {
+        spot[review.id] = review;
+      });
+
+      return { ...state, spot };
+    }
+
+
+    case POST_REVIEW: {
+      const spot = { ...state.spot };
+      spot[action.review.id] = action.review;
+
+      return { ...state, spot };
+    }
+
+
+    case GET_CURRENT_USER_REVIEW: {
+      const user = { ...state.user };
+
+      action.reviews.Reviews.forEach(review => {
+        user[review.id] = review;
+      });
+
+      return { ...state, user };
+    }
+
+
+    case UPDATE_REVIEW: {
+      const user = { ...state.user };
+      user[action.review.id] = action.review;
+
+      return { ...state, user };
+    }
+
+
+    case DELETE_REVIEW: {
+      const spot = { ...state.spot };
+      delete spot[action.review.id];
+
+      return { ...state, spot, user: {} };
+    }
+
+
+    default:
+      return state;
+  }
 };
-
 
 export default reviewReducer;

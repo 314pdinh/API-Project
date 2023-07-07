@@ -49,7 +49,7 @@ function ProfileButton({ user }) {
           </NavLink>
         </div>
       </div>
-      
+
       <button onClick={openMenu} id='profile-button'>
         <i className="fas fa-user-circle" />
       </button>
@@ -62,8 +62,15 @@ function ProfileButton({ user }) {
               Manage Spot
             </NavLink>
             <p>
-              <button onClick={logout}>Log Out</button>
+
+            <p>
+              <NavLink exact to='/reviews/current'>
+                Manage Reviews
+              </NavLink>
             </p>
+
+            </p>
+            <button onClick={logout}>Log Out</button>
           </>
         ) : (
           <>

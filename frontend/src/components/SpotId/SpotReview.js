@@ -1,62 +1,58 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getSpotThunk, getAllSpotsThunk, createSpotThunk } from "../../store/spot";
-import { getReviewsThunk } from "../../store/review";
-import { useParams, useHistory } from "react-router-dom";
-import PostReview from "./PostReview";
-import OpenModalButton from "../OpenModalButton";
+import DeleteReview from "../DeleteReview";
+import OpenModalMenuItem from '../OpenModalButton';
 
-const SpotIdReview = ({ spotId }) => {
-  const review = useSelector((state) => state.reviews.spot);
-  const dispatch = useDispatch();
+const SpotReviews = ({ spot, newReviewList, userReview, userId }) => {
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
-    dispatch(getReviewsThunk(spotId));
-    dispatch(getSpotThunk(spotId));
-  }, [dispatch, spotId]);
+    if (!showMenu) return;
 
+    const closeMenu = (e) => {
+      if (!e.target.closest(".menu-container")) {
+        setShowMenu(false);
+      }
+    };
 
-  const oneSpot = useSelector((state) => state.spots.singleSpot);
-  const userId = useSelector((state) => state.session.user);
+    document.addEventListener('click', closeMenu);
 
-  const reviewId = Object.values(review);
-  let userReview = null;
-  if(userId) {
-    userReview = reviewId.find((review) => review.User && review.User.id === userId.id);
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
+
+  if (!newReviewList) {
+    return null;
   }
-  let isSpotOwner = false;
-  if (userId && oneSpot && oneSpot.Owner) {
-    isSpotOwner = userId.id === oneSpot.Owner.id;
-  }
-
 
   return (
     <>
-    {!userReview && !isSpotOwner && (
-      <div>
-        <OpenModalButton
-          buttonText='Post Your Review'
-          modalComponent={<PostReview spotId={spotId} />}
-        />
-        {!reviewId.length && (
-          <p>Be the first to post a review!</p>
-        )}
-      </div>
-    )}
-      
-      <div className="reviews-list">
-        {reviewId.map((review) => (
-          <div key={review.id}>
-          <h3 className="reviewUser-name">{review.User && review.User.firstName}
-          </h3>
-          <h4>July 2020</h4>
-          <p>{review.review}</p>
-          </div>
+      <ul>
+        {newReviewList.length > 0 && newReviewList.map(review => (
+          <li key={review.id}>
+            <div>{review.User && review.User.firstName}</div>
+            {review.createdAt.split('-')[1] && (
+              <div className="date">
+                {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(review.createdAt))}
+                {' '}
+                {new Date(review.createdAt).getFullYear()}
+              </div>
+            )}
+            <div>{review.review}</div>
+            {userReview && userId && review.userId === userId && (
+              <div className='modal'>
+                <OpenModalMenuItem
+                  buttonText="Delete"
+                  onItemClick={closeMenu}
+                  modalComponent={<DeleteReview review={review} spot={spot} />}
+                />
+              </div>
+            )}
+          </li>
         ))}
-      </div>
-
+      </ul>
     </>
   );
-};
+}
 
-export default SpotIdReview;
+export default SpotReviews;
