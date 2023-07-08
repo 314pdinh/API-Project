@@ -7,9 +7,7 @@ import { useParams } from "react-router-dom";
 import SpotImages from "./SpotImages";
 import SpotReviews from "./SpotReview";
 import OpenModalMenuItem from '../OpenModalButton'
-import CreateForm from "../SpotNew";
 import PostReview from "../ReviewPost";
-
 
 const SpotId = () => {
   const dispatch = useDispatch();
@@ -55,54 +53,68 @@ const SpotId = () => {
   const newReviewList = reviewList.filter(review => review.spotId === spot.id);
   const userReview = newReviewList.find(review => review.userId === userId);
 
-  const totalReviews = newReviewList.length;
-  const avgStarRating = spot && spot.avgStarRating ? spot.avgStarRating.toFixed(1) : 'N/A';
 
   return (
-    <section>
-      <div className='box'>
-        <div className='spot-box'>
-          <h1>{spot.name}</h1>
-          <div className='info'>{spot.city}, {spot.state}, {spot.country}</div>
-          <SpotImages spot={spot} />
-          <div className='reserve-box'>
-            <div className='reserve-wrap'>
-              <div className='host'>
-                <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
-                <div>{spot.description}</div>
-              </div>
-            </div>
-            <div className='review'>
-              <div className='reserve'>
-                <div className='money'>
-                  <div>$ {spot.price} night</div>
-                  {totalReviews === 1 ? (
-                    <div>★ {avgStarRating} · {totalReviews} review</div>
-                  ) : (
-                    <div>★ {avgStarRating} · {totalReviews} reviews</div>
-                  )}
-                </div>
-                <button onClick={reserve}>Reserve</button>
-              </div>
-            </div>
+<section>
+  <div className='box'>
+    <div className='spot-box'>
+      <h1>{spot.name}</h1>
+      <div className='info'>{spot.city}, {spot.state}, {spot.country}</div>
+      <SpotImages spot={spot} />
+      <div className='reserve-box'>
+        <div className='reserve-wrap'>
+          <div className='host'>
+            <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+            <div>{spot.description}</div>
           </div>
-          <h1>★ {avgStarRating} · {totalReviews} {totalReviews === 1 ? 'review' : 'reviews'}</h1>
-          <SpotReviews spot={spot} newReviewList={newReviewList} userReview={userReview} userId={userId} />
         </div>
-        <div className='new-post'>
-          {userId && !userReview && (
-            <div className='modal'>
-              <OpenModalMenuItem
-                buttonText='Post Your Review'
-                onItemClick={closeMenu}
-                modalComponent={<PostReview spot={spot} />}
-              />
+        <div className="review">
+          <div className='reserve'>
+            <div className='money'>
+              <div>$ {spot.price} night</div>
+              {(!userId || newReviewList.length === 0) && <div>★ New</div>}
+              {newReviewList.length === 1 && (
+                <div>★ {spot.avgStarRating}.0 · {newReviewList.length} review</div>
+              )}
+              {newReviewList.length > 1 && (
+                <div>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</div>
+              )}
             </div>
-          )}
+            <button onClick={reserve}>Reserve</button>
+          </div>
         </div>
       </div>
-    </section>
+      {(!userId || newReviewList.length === 0) && <h1>★ New</h1>}
+      {newReviewList.length === 1 && (
+        <h1>★ {spot.avgStarRating}.0 · {newReviewList.length} review</h1>
+      )}
+      {newReviewList.length > 1 && (
+        <h1>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</h1>
+      )}
+      {userId !== spot.ownerId && !userReview && userId && (
+        <div className='new-post'>
+          <div className='modal'>
+            <OpenModalMenuItem
+              buttonText="Post Your Review"
+              onItemClick={closeMenu}
+              modalComponent={<PostReview spot={spot} />}
+            />
+            {newReviewList.length === 0 && <h4>Be the first to post a review!</h4>}
+          </div>
+        </div>
+      )}
+      {userId !== spot.ownerId && (
+        <SpotReviews
+          spot={spot}
+          newReviewList={newReviewList}
+          userReview={userReview}
+        />
+      )}
+    </div>
+  </div>
+</section>
   );
 };
 
 export default SpotId;
+

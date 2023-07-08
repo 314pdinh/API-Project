@@ -8,8 +8,8 @@ import Spots from './components/SpotPage';
 import SpotId from './components/SpotId';
 import CreateForm from './components/SpotNew';
 import ManageSpot from './components/SpotManage';
-import UpdateSpot from './components/SpotUpdate';
-import ManageReviews from "./components/ReviewsManage";
+import UpdateSpotForm from './components/SpotUpdate';
+// import ManageReviews from "./components/ReviewsManage";
 
 
 function App() {
@@ -24,23 +24,23 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded &&
         <Switch>
-          <Route exact path='/'>
-            <Spots />
-          </Route>
           <Route path='/spots/new'>
             <CreateForm />
           </Route>
           <Route path='/spots/current'>
             <ManageSpot />
           </Route>
-          <Route exact path={'/reviews/current'}>
+          {/* <Route exact path={'/reviews/current'}>
             <ManageReviews />
-          </Route>
+          </Route> */}
           <Route path="/spots/:spotId/edit">
-            <UpdateSpot />
+            <UpdateSpotForm />
           </Route>
           <Route path='/spots/:spotId'>
             <SpotId />
+          </Route>
+          <Route exact path='/'>
+            <Spots />
           </Route>
         </Switch>}
     </>

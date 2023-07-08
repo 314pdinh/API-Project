@@ -1,46 +1,51 @@
+// this is good!!!!
+
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSpotsThunk } from "../../store/spot";
 import { NavLink } from "react-router-dom";
-import './Spot.css';
+import { Link } from "react-router-dom";
+
+import './Spots.css';
 
 const Spots = () => {
   const dispatch = useDispatch();
-  const spots = useSelector((state) => state.spots);
-  const allSpots = Object.values(spots.allSpots);
+  const allSpots = useSelector(state => Object.values(state.spots.allSpots));
 
+  
   useEffect(() => {
     dispatch(getAllSpotsThunk());
   }, [dispatch]);
+  
+  
+  if (allSpots.length === 0) {
+    return null;
+  }
 
   return (
-    <div className="spots-container">
-      {allSpots.map((spot) => (
-        <NavLink key={spot.id} to={`/spots/${spot.id}`}>
-          <div className="spot-card">
-            <img id="spot-image" src={spot.previewImage} alt="img" />
 
-            <div className="review">
-              <b>★ {spot.avgRating.toFixed(1)}</b>
-            </div>
-            <div className="locationPrice">
-
-            <div className="city" >
-              
-              {spot.city}, {spot.state}
-            
-            </div>
-            {/* <div className="country">{spot.country}</div> */}
-            <div className="price">
-              <b>${spot.price}</b>night
-            </div>
-
-            </div>
+    <main>
+      <ul>
+        {allSpots.map(spot => (
+          <div key={spot.id} className='spot' title={spot.name}>
+            <Link to={`/spots/${spot.id}`}>
+              <div className='image'>
+                <img src={spot.previewImage} alt='home' />
+              </div>
+              <div className='list'>
+                <div className='star'>
+                  <li>{spot.city}, {spot.state}</li>
+                  {!spot.avgRating && <li>★ New</li>}
+                  {spot.avgRating && <li>★ {spot.avgRating.toFixed(1)}</li>}
+                </div>
+                <li>${spot.price} night</li>
+              </div>
+            </Link>
           </div>
-        </NavLink>
-      ))
-    }
-    </div>
+        ))}
+      </ul>
+    </main>
   );
 };
 
