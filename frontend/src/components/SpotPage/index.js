@@ -27,7 +27,8 @@ const Spots = () => {
 
     <main>
       <ul>
-        {allSpots.map(spot => (
+        {allSpots.length > 0 && 
+        allSpots.map(spot => (
           <div key={spot.id} className='spot' title={spot.name}>
             <Link to={`/spots/${spot.id}`}>
               <div className='image'>
