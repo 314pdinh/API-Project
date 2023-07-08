@@ -72,7 +72,7 @@ const SpotId = () => {
           <div className='reserve'>
             <div className='money'>
               <div>$ {spot.price} night</div>
-              {(!userId || newReviewList.length === 0) && <div>★ New</div>}
+              {(!userId && newReviewList.length === 0) && <div>★ New</div>}
               {newReviewList.length === 1 && (
                 <div>★ {spot.avgStarRating}.0 · {newReviewList.length} review</div>
               )}

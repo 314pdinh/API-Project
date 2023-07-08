@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
+//test
+
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
@@ -26,7 +28,7 @@ function LoginFormModal() {
   };
 
 
-  const isDisabled = credential.length <= 4 || password.length <= 6;
+  const isDisabled = credential.length < 4 || password.length < 6;
 
   const demoUser = async () => {
     await dispatch(sessionActions.login({
@@ -45,6 +47,7 @@ function LoginFormModal() {
           <input
             type="text"
             value={credential}
+            // placeholder="Username or email"
             onChange={(e) => setCredential(e.target.value)}
             required
           />
@@ -53,6 +56,7 @@ function LoginFormModal() {
           Password
           <input
             type="password"
+            // placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

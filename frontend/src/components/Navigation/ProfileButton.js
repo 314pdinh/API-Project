@@ -60,18 +60,12 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <p>Hello, {user.username}</p>
+            <p>Hello, {user.firstName}</p>
             <p>{user.email}</p>
             <NavLink to='/spots/current' style={{ textDecoration: 'none' }}>
               Manage Spot
             </NavLink>
             <p>
-
-            <p>
-              <NavLink exact to='/reviews/current'>
-                Manage Reviews
-              </NavLink>
-            </p>
 
             </p>
             <button onClick={logout}>Log Out</button>

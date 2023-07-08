@@ -46,10 +46,10 @@ const PostReview = ({ spot }) => {
     return num <= stars ? "fa-solid fa-star" : "fa-regular fa-star";
   };
 
-  const isDisabled = text.length <= 10 || Object.values(errors).length > 0;
+  const isDisabled = text.length < 10 || Object.values(errors).length > 0;
 
   return (
-    <div className="post-review">
+    <div className="post-review-box">
       <h1>How was your stay?</h1>
       <form onSubmit={handleSubmit}>
         <div className="errors">{errors.text}</div>
@@ -60,14 +60,14 @@ const PostReview = ({ spot }) => {
         />
         <div className="errors">{errors.stars}</div>
         <div className="rating-input">
-          {[1, 2, 3, 4, 5].map((num) => (
+          {[ 1, 2, 3, 4, 5].map((num) => (
             <i
               key={num}
               className={`${setStar(num)} fa-regular fa-star`}
               style={{ color: 'black' }}
               onClick={() => setStars(num)}
-              // onMouseEnter={() => setStars(num)}
-              onMouseLeave={() => setStars(stars)}
+              onMouseEnter={() => setStars(num)}
+              onMouseLeave={() => setStars(0)}
             />
           ))}
           Stars

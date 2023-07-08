@@ -9,7 +9,6 @@ import SpotId from './components/SpotId';
 import CreateForm from './components/SpotNew';
 import ManageSpot from './components/SpotManage';
 import UpdateSpotForm from './components/SpotUpdate';
-// import ManageReviews from "./components/ReviewsManage";
 
 
 function App() {
@@ -30,9 +29,6 @@ function App() {
           <Route path='/spots/current'>
             <ManageSpot />
           </Route>
-          {/* <Route exact path={'/reviews/current'}>
-            <ManageReviews />
-          </Route> */}
           <Route path="/spots/:spotId/edit">
             <UpdateSpotForm />
           </Route>
