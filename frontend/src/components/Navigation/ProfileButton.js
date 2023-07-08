@@ -5,11 +5,13 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -36,6 +38,8 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    history.push('/')
+    
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -56,18 +60,12 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <p>Hello, {user.username}</p>
+            <p>Hello, {user.firstName}</p>
             <p>{user.email}</p>
             <NavLink to='/spots/current' style={{ textDecoration: 'none' }}>
               Manage Spot
             </NavLink>
             <p>
-
-            <p>
-              <NavLink exact to='/reviews/current'>
-                Manage Reviews
-              </NavLink>
-            </p>
 
             </p>
             <button onClick={logout}>Log Out</button>

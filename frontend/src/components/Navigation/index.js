@@ -15,7 +15,7 @@ function Navigation({ isLoaded }) {
           <div className='airBNB'>
             <li>
               <NavLink exact to="/">
-                <i className="fa-solid fa-square"></i> 
+                <i className="fa-solid"></i> 
                 StarWarsBnB
               </NavLink>
             </li>
@@ -23,11 +23,11 @@ function Navigation({ isLoaded }) {
           {isLoaded && sessionUser && (
             <ul>
               <div className='top'>
-                <div className='new'>
+                {/* <div className='new'>
                   <NavLink exact to='/spots/new'>
                     Create a New Spot
                   </NavLink>
-                </div>
+                </div> */}
                 <div className='profile'>
                   <li>
                     <ProfileButton user={sessionUser} />
@@ -38,14 +38,6 @@ function Navigation({ isLoaded }) {
           )}
           {isLoaded && !sessionUser && (
             <ul className='nav'>
-              <div className='airBNB'>
-                <li>
-                  <NavLink exact to="/">
-                    <i className="fa-solid fa-square"></i> 
-                    StarWarsBnB
-                  </NavLink>
-                </li>
-              </div>
               <li>
                 <ProfileButton user={sessionUser} />
               </li>

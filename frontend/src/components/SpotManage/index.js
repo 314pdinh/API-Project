@@ -8,23 +8,44 @@ import DeleteSpot from "../SpotDelete";
 
 const ManageSpot = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const spotObj = useSelector(state => state.spots.allSpots);
     const user = useSelector(state => state.session.user);
-    const spotList = Object.values(spotObj);
+
+    const spotList = useSelector(state => Object.values(state.spots.allSpots));
+    const [menu, setMenu] = useState(false);
+
     const newList = spotList.filter(spot => spot.ownerId === user.id);
-    const history = useHistory();
 
     useEffect(() => {
         dispatch(getCurrentUserSpot());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (!menu) return;
+
+        const exitMenu = (e) => {
+            if (!e.target.closest('.menu')) {
+                setMenu(false);
+            }
+        }
+
+        document.addEventListener("click", exitMenu);
+
+        return () => document.removeEventListener("click", exitMenu);
+      }, [menu]);
+
+    const exitMenu = () => setMenu(false);
+
+
+
     const create = () => {
         history.push('/spots/new');
     };
 
-    if (!newList) {
-        return null;
-    }
+    // if (!newList) {
+    //     return null;
+    // }
 
     return (
         <main>
@@ -49,14 +70,20 @@ const ManageSpot = () => {
                                 <li>${spot.price} night</li>
                             </div>
                         </Link>
+
                         <div className="buttons">
                             <button onClick={() => history.push(`/spots/${spot.id}/edit`)}>
                                 Update
                             </button>
+
+
                             <OpenModalMenuItem
+                                onItemClick={exitMenu}
                                 buttonText="Delete"
                                 modalComponent={<DeleteSpot spot={spot} />}
                             />
+
+
                         </div>
                     </div>
                 ))}

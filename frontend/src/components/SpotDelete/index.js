@@ -17,16 +17,16 @@ function DeleteSpot({ spot }) {
 
     return (
         <>
-        <div className="delete">
+        <div className="delete-box">
             <h1>Confirm Delete</h1>
             <h4>Are you sure you want to remove this spot from the listings?</h4>
             <form onSubmit={handleSubmit}>
-                <div className='red'>
+                <div className='RED'>
                 <button type='submit'>
                     Yes(Delete Spot)
                 </button>
                     </div>
-                    <div className="grey">
+                    <div className="GREY">
                 <button onClick={closeModal}>
                     No(Keep Spot)
                 </button>
