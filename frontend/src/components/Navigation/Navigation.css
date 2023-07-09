@@ -2,24 +2,54 @@
     display: none;
 }
 
-.nav-container {
-    position: relative;
-    border-bottom: 0.2px solid rgb(189, 188, 188);
-    margin-bottom: 2em;
+li {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
 }
 
-.nav-Bar {
+a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+}
+
+.top a {
+    color: green;
+}
+
+.nav-wrap {
+    border-bottom: solid grey;
+}
+
+.nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;  
+    margin: 2rem;
 }
 
-.Home-Button {
-    font-size: 2em;
+.airBnB {
+    font-size: 30px;
+    height: 30px;
 }
 
-#profile-button {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 50px;
+.airBnB a {
+    color: black;
+}
+
+.airBnB a:hover {
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    margin-top: 0.5rem;
+    border: 1px solid black;
+    position: absolute;
+    background-color: whitesmoke;
+    top: 70px;
+    right: 40px;
 }

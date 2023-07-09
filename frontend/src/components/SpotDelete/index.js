@@ -4,6 +4,7 @@ import { getSpotThunk, getAllSpotsThunk, deleteSpotThunk } from "../../store/spo
 import { useModal } from "../../context/Modal";
 import { getReviewsThunk } from "../../store/review";
 import { useParams } from "react-router-dom";
+import './deleteSpot.css';
 
 function DeleteSpot({ spot }) {
     const dispatch = useDispatch();

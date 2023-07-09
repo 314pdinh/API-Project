@@ -23,11 +23,6 @@ function Navigation({ isLoaded }) {
           {isLoaded && sessionUser && (
             <ul>
               <div className='top'>
-                {/* <div className='new'>
-                  <NavLink exact to='/spots/new'>
-                    Create a New Spot
-                  </NavLink>
-                </div> */}
                 <div className='profile'>
                   <li>
                     <ProfileButton user={sessionUser} />
