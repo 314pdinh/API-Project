@@ -11,7 +11,7 @@ function DeleteReview({ spot, review }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const deleteRev = await dispatch(deleteReviewThunk(review))
-        if(deleteRev.id === review.id) {
+        if (deleteRev.id === review.id) {
             dispatch(getSpotThunk(spot.id))
             dispatch(getReviewsThunk())
             closeModal()
@@ -20,21 +20,21 @@ function DeleteReview({ spot, review }) {
 
     return (
         <>
-        <div className="delete-box">
-            <h1>Confirm Delete</h1>
-            <h4>Are you sure you want to remove this review?</h4>
-            <form onSubmit={handleSubmit}>
-                <div className='RED'>
-                <button type='submit'>
-                    Yes(Delete Review)
-                </button>
+            <div className="delete-box">
+                <h1>Confirm Delete</h1>
+                <h4>Are you sure you want to delete this review?</h4>
+                <form onSubmit={handleSubmit}>
+                    <div className='RED'>
+                        <button type='submit'>
+                            Yes(Delete Review)
+                        </button>
                     </div>
                     <div className="GREY">
-                <button onClick={closeModal}>
-                    No(Keep Review)
-                </button>
+                        <button onClick={closeModal}>
+                            No(Keep Review)
+                        </button>
                     </div>
-            </form>
+                </form>
             </div>
         </>
     );

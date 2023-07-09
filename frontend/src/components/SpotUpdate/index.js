@@ -258,7 +258,7 @@ const UpdateSpot = () => {
                                 <div className='errors'>{errors.price}</div>
                             </div>
 
-                            <button type="submit">Create Spot</button>
+                            <button type="submit">Update your Spot</button>
                         </form>
                     </div>
 
