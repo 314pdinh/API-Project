@@ -19,11 +19,11 @@ img {
     margin-bottom: 2rem;
 }
 
-.reserve-wrap h2 {
+.host-side h2 {
     margin-bottom: 1rem;
 }
 
-.reserve-box {
+.header-box-below {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -87,11 +87,11 @@ img {
     width: 100%;
 }
 
-.modal button {
+.post-review-modal button {
     width: 150px;
     height: 35px;
-    background-color: gray;
-    color: white;
+    background-color: cyan;
+    color: black;
 }
 
 .money {
