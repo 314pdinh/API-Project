@@ -53,6 +53,7 @@ const SpotId = () => {
 
   const shouldRenderReviewForm = !userId && newReviewList.length === 0;
 
+  
   return (
     <section>
       <div className="box">
@@ -108,6 +109,7 @@ const SpotId = () => {
               spot={spot}
               newReviewList={newReviewList}
               userReview={userReview}
+              userId={userId}
             />
           )}
         </div>
