@@ -5,12 +5,14 @@ import { useParams, useHistory } from "react-router-dom";
 
 import './updateSpot.css';
 
-const UpdateSpot = () => {
+const EditSpotForm = () => {
     let { spotId } = useParams();
-    spotId = Number(spotId);
+    spotId = parseInt(spotId);
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spots.singleSpot);
     const history = useHistory();
+
+
     const [country, setCountry] = useState()
     const [street, setStreet] = useState();
     const [city, setCity] = useState();
@@ -87,12 +89,12 @@ const UpdateSpot = () => {
             errors.price = 'Price is required'
         }
 
-        const editedSpot = await dispatch(updateSpotThunk(spotObj));
+        const updatedSpot = await dispatch(updateSpotThunk(spotObj));
 
         if (Object.values(errors).length > 0) {
             setErrors(errors);
         } else {
-            history.push(`/spots/${editedSpot.id}`)
+            history.push(`/spots/${updatedSpot.id}`)
         }
     }
 
@@ -102,14 +104,14 @@ const UpdateSpot = () => {
         return (
             Object.keys(spot).length > 1 && (
                 <>
-                    <div className='update-form'>
+                    <div className='spot-form'>
                         <form onSubmit={handleSubmit}>
                             <div className='location'>
                                 <h2>Update Spot</h2>
                                 <h3>Where's your place located?</h3>
                                 <h5>Guests will only get your exact address once they booked a reservation.</h5>
                                 <label>
-                                    <div className='box'>
+                                    <div className='flex'>
                                         Country
                                         <br></br>
                                         <div className='errors'>{errors.country}</div>
@@ -122,7 +124,7 @@ const UpdateSpot = () => {
                                     />
                                 </label>
                                 <label>
-                                    <div className='box'>
+                                    <div className='flex'>
                                         Street Address
                                         <div className='errors'>{errors.street}</div>
                                     </div>
@@ -135,7 +137,7 @@ const UpdateSpot = () => {
                                 </label>
                                 <div className='city'>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             City
                                             <div className='errors'>{errors.city}</div>
                                         </div>
@@ -151,7 +153,7 @@ const UpdateSpot = () => {
                                         </div>
                                     </label>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             State
                                             <div className='errors'>{errors.state}</div>
                                         </div>
@@ -165,7 +167,7 @@ const UpdateSpot = () => {
                                 </div>
                                 <div className='lat'>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             Latitude
                                             <div className='errors'>{errors.latitude}</div>
                                         </div>
@@ -184,7 +186,7 @@ const UpdateSpot = () => {
                                         </div>
                                     </label>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             Longitude
                                             <div className='errors'>{errors.longitude}</div>
                                         </div>
@@ -202,7 +204,7 @@ const UpdateSpot = () => {
                                     </label>
                                 </div>
                             </div>
-                            <div className='description-box'>
+                            <div className='descript'>
                                 <h3>Describe your place to guests</h3>
                                 <h6>Mention the best features of your space, any special amentities like
                                     fast wif or parking, and what you love about the neighborhood.</h6>
@@ -234,6 +236,8 @@ const UpdateSpot = () => {
                                         $ <input
                                             type='number'
                                             placeholder=' Price per night (USD)'
+                                            step='1'
+                                            min='1'
                                             value={price}
                                             onChange={(e) => setPrice(e.target.value)}
                                         />
@@ -241,7 +245,7 @@ const UpdateSpot = () => {
                                 </label>
                                 <div className='errors'>{errors.price}</div>
                             </div>
-                            <button type="submit"><b>Update Spot</b></button>
+                            <button type="submit">Update Spot</button>
                         </form>
                     </div>
                 </>
@@ -250,4 +254,4 @@ const UpdateSpot = () => {
     }
 }
 
-export default UpdateSpot;
+export default EditSpotForm;
