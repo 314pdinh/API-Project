@@ -35,8 +35,8 @@ const EditSpotForm = () => {
             setStreet(spot.address);
             setCity(spot.city);
             setState(spot.state);
-            setLatitude(spot.lat);
-            setLongitude(spot.lng);
+            // setLatitude(spot.lat);
+            // setLongitude(spot.lng);
             setDescription(spot.description);
             setName(spot.name)
             setPrice(spot.price)
