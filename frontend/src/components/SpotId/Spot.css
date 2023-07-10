@@ -1,0 +1,163 @@
+.info {
+    font-size: 16px;
+    margin-bottom: 1rem;
+}
+
+img {
+    border-radius: 5px;
+}
+
+.spot-box h1 {
+    font-size: 30px;
+    margin-bottom: 1rem;
+}
+
+.box {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.host-side h2 {
+    margin-bottom: 1rem;
+}
+
+
+.header-host {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 2px black;
+}
+
+.reserve {
+    border: solid 2px black;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 350px;
+    border-radius: 8px;
+}
+
+.reserve button {
+    width: 300px;
+    height: 40px;
+    border-radius: none;
+    background-color: orangered;
+    color: white;
+    box-shadow: 1px 1px 1px 1px black;
+    margin: 1rem;
+}
+
+.host {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.img1 {
+    width: 670px;
+}
+
+.img1 img {
+    height: 400px;
+    width: 100%;
+}
+
+.img2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    width: 670px;
+}
+
+.img2 img {
+    height: 200px;
+    width: 100%;
+}
+
+.post-review-modal button {
+    width: 150px;
+    height: 35px;
+    background-color: cyan;
+    color: black;
+}
+
+.money {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.75rem;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.new-post {
+    position: static;
+}
+
+@media (max-width: 1300px) {
+    .img2 {
+        grid: auto-flow / 1fr 1fr;
+    }
+
+    .img1 {
+        width: 570px;
+    }
+
+    .img img {
+        height: fit-content;
+    }
+
+    .img2 {
+        width: 570px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .img2 {
+        grid: auto-flow / 1fr 1fr;
+    }
+
+    .img1 {
+        width: 440px;
+    }
+
+    .img img {
+        height: fit-content;
+    }
+
+    .img2 {
+        width: 440px;
+    }
+}
+
+@media (max-width: 900px) {
+    .img2 {
+        grid: auto-flow / 1fr 1fr;
+    }
+
+    .img1 {
+        width: 350px;
+    }
+
+    .img img {
+        height: fit-content;
+    }
+
+    .img2 {
+        width: 350px;
+    }
+}
