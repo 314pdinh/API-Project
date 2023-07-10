@@ -22,12 +22,12 @@ function DeleteSpot({ spot }) {
             <h1>Confirm Delete</h1>
             <h4>Are you sure you want to remove this spot from the listings?</h4>
             <form onSubmit={handleSubmit}>
-                <div className='RED'>
+                <div className='yes'>
                 <button type='submit'>
                     Yes(Delete Spot)
                 </button>
                     </div>
-                    <div className="GREY">
+                    <div className="no">
                 <button onClick={closeModal}>
                     No(Keep Spot)
                 </button>

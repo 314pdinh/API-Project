@@ -24,12 +24,12 @@ function DeleteReview({ spot, review }) {
                 <h1>Confirm Delete</h1>
                 <h4>Are you sure you want to delete this review?</h4>
                 <form onSubmit={handleSubmit}>
-                    <div className='RED'>
+                    <div className='yes'>
                         <button type='submit'>
                             Yes(Delete Review)
                         </button>
                     </div>
-                    <div className="GREY">
+                    <div className="no">
                         <button onClick={closeModal}>
                             No(Keep Review)
                         </button>

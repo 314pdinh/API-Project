@@ -6,6 +6,8 @@ import OpenModalButton from "../OpenModalButton";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteSpot from "../SpotDelete";
 
+import './manageSpot.css';
+
 const ManageSpot = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -33,7 +35,7 @@ const ManageSpot = () => {
         document.addEventListener("click", exitMenu);
 
         return () => document.removeEventListener("click", exitMenu);
-      }, [menu]);
+    }, [menu]);
 
     const exitMenu = () => setMenu(false);
 
@@ -65,23 +67,24 @@ const ManageSpot = () => {
                             <div className='list'>
                                 <div className='star'>
                                     <li>{spot.city}, {spot.state}</li>
-                                    <li>★ {spot.avgRating}</li>
+                                    <li>★ {spot.avgRating.toFixed((1))}</li>
                                 </div>
                                 <li>${spot.price} night</li>
                             </div>
                         </Link>
 
-                        <div className="buttons">
+                        <div className="buttons-del-update">
                             <button onClick={() => history.push(`/spots/${spot.id}/edit`)}>
                                 Update
                             </button>
 
 
                             <OpenModalMenuItem
-                                onItemClick={exitMenu}
                                 buttonText="Delete"
+                                onItemClick={exitMenu}
                                 modalComponent={<DeleteSpot spot={spot} />}
                             />
+                            
 
 
                         </div>

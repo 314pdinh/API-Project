@@ -1,39 +1,39 @@
-.create-form form {
+.update-form form {
     width: 400px;
     display: flex;
     flex-direction: column;
 }
 
-.create-form {
+.update-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.create-form h2 {
+.update-form h2 {
     margin: 1rem 0;
 }
 
-.create-form h3 {
+.update-form h3 {
     margin-top: 0.5rem;
 }
 
-.create-form h5 {
+.update-form h5 {
     margin: 0.3rem 0 1rem;
 }
 
-.create-form h6 {
+.update-form h6 {
     font-size: 12.5px;
     margin-top: 0.5rem;
 }
 
-.create-form label {
+.update-form label {
     display: flex;
     flex-direction: column;
     margin-top: 0.5rem;
 }
 
-.create-form textarea {
+.update-form textarea {
     border: solid 2px black;
     height: 100px;
     width: 100%;
@@ -41,7 +41,7 @@
     background-color: rgba(176, 213, 246, 0.279);
 }
 
-.create-form button {
+.update-form button {
     margin: 1rem 0 2rem;
     width: 100px;
     color: white;
@@ -50,73 +50,54 @@
     align-self: center;
 }
 
-.create-form .lat {
+.update-form .lat {
     justify-content: center;
 }
 
-.create-form .box {
+.update-form .box {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
     align-items: center;
 }
 
-.create-form .errors {
+.update-form .errors {
     font-size: 11.7px;
     margin-bottom: 0.5rem;
 }
 
-.create-form input {
+.update-form input {
     border: solid 2px black;
     margin-top: 0.5rem;
     height: 25px;
     background-color: rgba(176, 213, 246, 0.279);
 }
 
-
-.create-form .price input {
+.update-form .price input {
     width: 386px;
     margin-bottom: 0.5rem;
 }
 
-.create-form .description-box {
+.update-form .description-box {
     border-bottom: solid 2px black;
 }
 
-.create-form .spot-name input {
+.update-form .spot-name input {
     margin-bottom: 0.5rem;
 }
 
-.create-form .spot-name {
+.update-form .spot-name {
     border-bottom: solid 2px black;
 }
 
-.create-form .spot-name input {
+.update-form .spot-name input {
     width: 100%;
 }
 
-.create-form .cost {
+.update-form .cost {
     border-bottom: solid 2px black;
 }
 
-.create-form .imageUrl {
-    display: flex;
-    flex-direction: column;
-    border-bottom: solid 2px black;
-    margin-bottom: 0.5rem;
-}
-
-.create-form .imageUrl input {
-    margin-bottom: 0.5rem;
-}
-
-.create-form .imgFour {
-    margin-bottom: 1rem;
-}
-
-.create-form .imgFour input {
-    width: 100%;
-}
 
 .city,
 .lat {
@@ -129,7 +110,6 @@
     border-bottom: solid 2px black;
     margin-bottom: 1rem;
 }
-
 
 .city-input input {
     width: 248px;

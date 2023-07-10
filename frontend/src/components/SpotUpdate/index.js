@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSpotThunk, getAllSpotsThunk, createSpotThunk, updateSpotThunk, getCurrentUserSpotThunk } from "../../store/spot";
 import { useParams, useHistory } from "react-router-dom";
 
+import './updateSpot.css';
+
 const UpdateSpot = () => {
 
     const spot = useSelector((state) => (state.spots.singleSpot))
@@ -119,14 +121,14 @@ const UpdateSpot = () => {
             Object.keys(spot).length > 1 && (
                 <>
 
-                    <div className='spot-form'>
+                    <div className='update-form'>
                         <form onSubmit={handleSubmit}>
                             <div className='location'>
                                 <h2>Update your Spot</h2>
                                 <h3>Where's your place located?</h3>
                                 <h5>Guests will only get your exact address once they booked a reservation.</h5>
                                 <label>
-                                    <div className='flex'>
+                                    <div className='box'>
                                         Country
                                         <br />
                                         <div className='errors'>{errors.country}</div>
@@ -139,7 +141,7 @@ const UpdateSpot = () => {
                                     />
                                 </label>
                                 <label>
-                                    <div className='flex'>
+                                    <div className='box'>
                                         Street Address
                                         <div className='errors'>{errors.street}</div>
                                     </div>
@@ -152,7 +154,7 @@ const UpdateSpot = () => {
                                 </label>
                                 <div className='city'>
                                     <label>
-                                        <div className='flex'>
+                                        <div className='box'>
                                             City
                                             <div className='errors'>{errors.city}</div>
                                         </div>
@@ -168,7 +170,7 @@ const UpdateSpot = () => {
                                         </div>
                                     </label>
                                     <label>
-                                        <div className='flex'>
+                                        <div className='box'>
                                             State
                                             <div className='errors'>{errors.state}</div>
                                         </div>
@@ -182,7 +184,7 @@ const UpdateSpot = () => {
                                 </div>
                                 <div className='lat'>
                                     <label>
-                                        <div className='flex'>
+                                        <div className='box'>
                                             Latitude
                                             <div className='errors'>{errors.latitude}</div>
                                         </div>
@@ -200,7 +202,7 @@ const UpdateSpot = () => {
                                         </div>
                                     </label>
                                     <label>
-                                        <div className='flex'>
+                                        <div className='box'>
                                             Longitude
                                             <div className='errors'>{errors.longitude}</div>
                                         </div>

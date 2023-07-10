@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotThunk, getAllSpotsThunk, createSpotThunk } from "../../store/spot";
 import { useParams, useHistory } from "react-router-dom";
+import './SpotNew.css';
 
 const CreateForm = () => {
     const spot = {
@@ -124,14 +125,14 @@ const CreateForm = () => {
         }
     };
     return (
-        <div className='spot-form'>
+        <div className='create-form'>
             <form onSubmit={handleSubmit}>
                 <div className='location'>
                     <h2>Create a new Spot</h2>
                     <h3>Where's your place located?</h3>
                     <h5>Guests will only get your exact address once they booked a reservation.</h5>
                     <label>
-                        <div className='flex'>
+                        <div className='box'>
                             Country
                             <br />
                             <div className='errors'>{errors.country}</div>
@@ -144,7 +145,7 @@ const CreateForm = () => {
                         />
                     </label>
                     <label>
-                        <div className='flex'>
+                        <div className='box'>
                             Street Address
                             <div className='errors'>{errors.street}</div>
                         </div>
@@ -157,7 +158,7 @@ const CreateForm = () => {
                     </label>
                     <div className='city'>
                         <label>
-                            <div className='flex'>
+                            <div className='box'>
                                 City
                                 <div className='errors'>{errors.city}</div>
                             </div>
@@ -173,7 +174,7 @@ const CreateForm = () => {
                             </div>
                         </label>
                         <label>
-                            <div className='flex'>
+                            <div className='box'>
                                 State
                                 <div className='errors'>{errors.state}</div>
                             </div>
@@ -187,7 +188,7 @@ const CreateForm = () => {
                     </div>
                     <div className='lat'>
                         <label>
-                            <div className='flex'>
+                            <div className='box'>
                                 Latitude
                                 <div className='errors'>{errors.latitude}</div>
                             </div>
@@ -205,7 +206,7 @@ const CreateForm = () => {
                             </div>
                         </label>
                         <label>
-                            <div className='flex'>
+                            <div className='box'>
                                 Longitude
                                 <div className='errors'>{errors.longitude}</div>
                             </div>
@@ -228,12 +229,12 @@ const CreateForm = () => {
                         fast wif or parking, and what you love about the neighborhood.</h6>
                     <textarea
                         value={description}
-                        placeholder=' Please write at least 30 characters'
+                        placeholder='Please write at least 30 characters'
                         onChange={(e) => setDescription(e.target.value)}
                     />
                     <div className='errors'>{errors.description}</div>
                 </div>
-                <div className='name'>
+                <div className='spot-name'>
                     <h3>Create a title for your spot</h3>
                     <h6>Catch guests' attention with a spot title that highlights what makes
                         your place special.</h6>
@@ -262,7 +263,7 @@ const CreateForm = () => {
                     </label>
                     <div className='errors'>{errors.price}</div>
                 </div>
-                <div className='pic'>
+                <div className='imageUrl'>
                     <h3>Liven up your spot with photos</h3>
                     <h5>Submit a link to at least one photo to publish your spot.</h5>
                     <input
@@ -272,7 +273,7 @@ const CreateForm = () => {
                         onChange={(e) => setPrevImage(e.target.value)}
                     />
                     <div className='errors'>{errors.previewImage}</div>
-                    <div className='errors'>{errors.image}</div>
+                    <div className='errors'>{errors.prevImage}</div>
                     <input
                         type='text'
                         placeholder=" Image URL"
@@ -294,7 +295,7 @@ const CreateForm = () => {
                         onChange={(e) => setImg3(e.target.value)}
                     />
                     <div className='errors'>{errors.img3}</div>
-                    <div className='lastimg'>
+                    <div className='imgFour'>
                         <input
                             type='text'
                             placeholder=" Image URL"

@@ -1,27 +1,27 @@
-.delete button {
-    width: 300px;
-    height: 30px;
-    margin: 0.5rem;
-    color: black;
-}
-
-.delete {
+.delete-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 1rem;
 }
 
-.delete h1 {
+.delete-box h1 {
     align-self: center;
 }
 
-.red button {
+.delete-box button {
+    width: 300px;
+    height: 30px;
+    margin: 0.5rem;
+    color: black;
+}
+
+.delete-box .yes button {
     background-color: red;
     color: white;
 }
 
-.grey button {
+.delete-box .no button {
     background-color: grey;
     color: white;
 }
