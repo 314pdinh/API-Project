@@ -201,4 +201,4 @@ const spotReducer = (state = initialState, action) => {
 
 export default spotReducer;
 
-//ignore this line
+console.log('hi')
