@@ -1,5 +1,6 @@
 import { csrfFetch } from "./csrf";
 
+
 //TYPE 
 export const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
 export const GET_SPOT = 'spots/GET_SPOT';
@@ -98,6 +99,7 @@ export const createSpotThunk = (spot, images) => async (dispatch) => {
   }
 };
 
+
 export const updateSpotThunk = (spot) => async (dispatch) => {
   try {
     console.log("Update Spot Thunk called with spot:", spot);
@@ -178,10 +180,10 @@ const spotReducer = (state = initialState, action) => {
 
 
     case UPDATE_SPOT: {
-
       console.log("Reducer - UPDATE_SPOT action:", action);
       console.log("Reducer - Current state:", state);
       console.log("Reducer - action.spot:", action.spot);
+
 
       return { ...state, singleSpot: { ...action.spot } };
     }
