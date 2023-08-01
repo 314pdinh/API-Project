@@ -1,0 +1,34 @@
+.list li {
+  color: black;
+  list-style-type: none;
+}
+
+.list p {
+  color: black;
+}
+
+main ul {
+  margin: 2rem, 4rem;
+}
+
+.spot {
+  margin: 1rem;
+  width: 310px;
+  transition: box-shadow .3s;
+  border-radius: 6px;
+}
+
+.star {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.spot:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, .3);
+}
+
+.image img {
+  height: 280px;
+  width: 310px;
+}

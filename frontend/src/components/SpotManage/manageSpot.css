@@ -1,0 +1,39 @@
+ul button {
+    width: 75px;
+    height: 30px;
+}
+
+.manage h1 {
+    margin-left: 3rem;
+}
+
+.manage {
+    margin: 2rem;
+}
+
+.manage button {
+    margin-top: 1rem;
+    background-color: cyan;
+    color: black;
+    height: 30px;
+    width: 150px;
+    margin-left: 3rem;
+}
+
+.buttons-del-update button,
+.buttons-del-update a {
+    background-color: gray;
+    color: white;
+}
+
+
+.buttons-del-update {
+    display: flex;
+    align-items: center;
+    margin-left: 0.3rem;
+}
+
+.spot {
+    display: flex;
+    flex-direction: column;
+}
