@@ -13,8 +13,8 @@ ul button {
 
 .manage button {
     margin-top: 1rem;
-    background-color: darkgray;
-    color: white;
+    background-color: cyan;
+    color: black;
     height: 30px;
     width: 150px;
     margin-left: 3rem;
@@ -25,6 +25,7 @@ ul button {
     background-color: gray;
     color: white;
 }
+
 
 .buttons-del-update {
     display: flex;
