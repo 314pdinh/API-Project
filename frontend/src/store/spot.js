@@ -181,9 +181,8 @@ const spotReducer = (state = initialState, action) => {
       console.log("updateSpot Reducer - newState", newState)
       
       
-      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } }
-      newState.allSpots[action.spot.id] = {...newState.allSpots[action.spotId], ...action.spot}
-      // return { ...state, singleSpot: { ...action.spot } };    }
+      const newState = { ...state, allSpots: { ...state.allSpots }, [action.spot.id]: action.spot }
+      return newState;
     }
 
     case DELETE_SPOT: {
