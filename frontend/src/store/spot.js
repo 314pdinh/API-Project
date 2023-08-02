@@ -178,7 +178,7 @@ const spotReducer = (state = initialState, action) => {
       console.log("Reducer - UPDATE_SPOT action:", action);
       console.log("Reducer - Current state:", state);
       console.log("Reducer - action.spot:", action.spot);
-      // output
+      // output here
       return { ...state, singleSpot: { ...action.spot } };
     }
 
