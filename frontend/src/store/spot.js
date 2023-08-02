@@ -180,8 +180,7 @@ const spotReducer = (state = initialState, action) => {
       console.log("Reducer - action.spot:", action.spot);
       console.log("updateSpot Reducer - newState", newState)
       
-      
-      const newState = { ...state, allSpots: { ...state.allSpots }, [action.spot.id]: action.spot }
+      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot, ...action.spot }};
       return newState;
     }
 
