@@ -54,9 +54,7 @@ const ManageSpot = () => {
             <div className="manage">
                 <h1>Manage Your Spots</h1>
                 <button onClick={create}>
-                    <b>
                     Create a New Spot
-                    </b>
                 </button>
             </div>
             <ul>

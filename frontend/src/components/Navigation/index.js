@@ -14,9 +14,9 @@ function Navigation({ isLoaded }) {
         <div className='nav'>
           <div className='airBNB'>
             <li>
-              <NavLink className='TitleHeader' exact to="/">
+              <NavLink exact to="/">
                 <i className="fa-solid"></i> 
-                GlobeHut
+                StarWarsBnB
               </NavLink>
             </li>
           </div>

@@ -4,19 +4,6 @@
     justify-content: center;
 }
 
-
-.login-box button {
-    display: flex;
-    color: white;
+#signup-button {
     cursor: pointer;
-    background-color: rgb(97, 22, 97);
-    height: 20px;
-    width: 100px;
-    justify-content: center;
 }
-
-.login-box button:disabled {
-    background-color: #fff;
-    color: black;
-    cursor: not-allowed;
-  }
