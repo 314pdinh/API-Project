@@ -27,6 +27,8 @@ const PostReview = ({ spot }) => {
 
     if (!text) {
       errors.text = "Review text is required";
+    } else if (text.length < 10) {
+      errors.text = "Review text must be atleast 10 characters long";
     }
     if (!stars) {
       errors.stars = "Stars must be an integer from 1 to 5";
