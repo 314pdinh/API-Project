@@ -99,19 +99,27 @@ export const createSpotThunk = (spot, images) => async (dispatch) => {
 };
 
 export const updateSpotThunk = (spot) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spot.id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(spot),
-  });
+  try {
+    console.log("Update Spot Thunk called with spot:", spot);
+    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(spot),
+    });
 
-  if (response.ok) {
-    const updatedSpotId = await response.json();
-    dispatch(updateSpot(updatedSpotId));
-    return updatedSpotId;
-  } else {
-    const errors = await response.json();
-    return errors;
+    if (response.ok) {
+      const updatedSpotId = await response.json();
+      console.log("Update Spot Thunk - Response from API:", updatedSpotId);
+      dispatch(updateSpot(updatedSpotId));
+      return updatedSpotId;
+    } else {
+      const errors = await response.json();
+      console.log("Update Spot Thunk - Error Response from API:", errors);
+      return errors;
+    }
+  } catch (error) {
+    console.log("Update Spot Thunk - Error:", error);
+    return error;
   }
 };
 
@@ -167,6 +175,10 @@ const spotReducer = (state = initialState, action) => {
 
 
     case UPDATE_SPOT: {
+      console.log("Reducer - UPDATE_SPOT action:", action);
+      console.log("Reducer - Current state:", state);
+      console.log("Reducer - action.spot:", action.spot);
+
       return { ...state, singleSpot: { ...action.spot } };
     }
 
