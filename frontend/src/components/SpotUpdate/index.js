@@ -17,8 +17,8 @@ const EditSpotForm = () => {
     const [street, setStreet] = useState();
     const [city, setCity] = useState();
     const [state, setState] = useState();
-    const [latitude, setLatitude] = useState(1);
-    const [longitude, setLongitude] = useState(1);
+    const [latitude, setLatitude] = useState();
+    const [longitude, setLongitude] = useState();
     const [description, setDescription] = useState();
     const [name, setName] = useState();
     const [price, setPrice] = useState();
@@ -35,8 +35,8 @@ const EditSpotForm = () => {
             setStreet(spot.address);
             setCity(spot.city);
             setState(spot.state);
-            // setLatitude(spot.lat);
-            // setLongitude(spot.lng);
+            setLatitude(spot.lat);
+            setLongitude(spot.lng);
             setDescription(spot.description);
             setName(spot.name)
             setPrice(spot.price)
@@ -53,8 +53,8 @@ const EditSpotForm = () => {
             address: street,
             city,
             state,
-            // lat: latitude,
-            // lng: longitude,
+            lat: latitude,
+            lng: longitude,
             description,
             name,
             price,
@@ -73,12 +73,12 @@ const EditSpotForm = () => {
         if (!state) {
             errors.state = 'State is required'
         }
-        // if (!latitude) {
-        //     errors.latitude = 'Latitude is required'
-        // }
-        // if (!longitude) {
-        //     errors.longitude = 'Longitude is required'
-        // }
+        if (!latitude) {
+            errors.latitude = 'Latitude is required'
+        }
+        if (!longitude) {
+            errors.longitude = 'Longitude is required'
+        }
         if (!description || description.length < 30) {
             errors.description = 'Description needs a minimum of 30 characters'
         }
@@ -104,14 +104,14 @@ const EditSpotForm = () => {
         return (
             Object.keys(spot).length > 1 && (
                 <>
-                    <div className='update-form'>
+                    <div className='spot-form'>
                         <form onSubmit={handleSubmit}>
                             <div className='location'>
                                 <h2>Update Spot</h2>
                                 <h3>Where's your place located?</h3>
                                 <h5>Guests will only get your exact address once they booked a reservation.</h5>
                                 <label>
-                                    <div className='box'>
+                                    <div className='flex'>
                                         Country
                                         <br></br>
                                         <div className='errors'>{errors.country}</div>
@@ -124,7 +124,7 @@ const EditSpotForm = () => {
                                     />
                                 </label>
                                 <label>
-                                    <div className='box'>
+                                    <div className='flex'>
                                         Street Address
                                         <div className='errors'>{errors.street}</div>
                                     </div>
@@ -137,7 +137,7 @@ const EditSpotForm = () => {
                                 </label>
                                 <div className='city'>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             City
                                             <div className='errors'>{errors.city}</div>
                                         </div>
@@ -153,7 +153,7 @@ const EditSpotForm = () => {
                                         </div>
                                     </label>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             State
                                             <div className='errors'>{errors.state}</div>
                                         </div>
@@ -167,7 +167,7 @@ const EditSpotForm = () => {
                                 </div>
                                 <div className='lat'>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             Latitude
                                             <div className='errors'>{errors.latitude}</div>
                                         </div>
@@ -186,7 +186,7 @@ const EditSpotForm = () => {
                                         </div>
                                     </label>
                                     <label>
-                                        <div className='box'>
+                                        <div className='flex'>
                                             Longitude
                                             <div className='errors'>{errors.longitude}</div>
                                         </div>
@@ -204,7 +204,7 @@ const EditSpotForm = () => {
                                     </label>
                                 </div>
                             </div>
-                            <div className='description-box'>
+                            <div className='descript'>
                                 <h3>Describe your place to guests</h3>
                                 <h6>Mention the best features of your space, any special amentities like
                                     fast wif or parking, and what you love about the neighborhood.</h6>
