@@ -5,15 +5,15 @@ import { useParams, useHistory } from "react-router-dom";
 
 import './updateSpot.css';
 
-const EditSpotForm = () => {
-    let { spotId } = useParams();
-    spotId = parseInt(spotId);
-    const dispatch = useDispatch();
-    const spot = useSelector((state) => state.spots.singleSpot);
+const UpdateSpot = () => {
+
+    const spot = useSelector((state) => (state.spots.singleSpot))
+    const { spotId } = useParams();
     const history = useHistory();
+    const dispatch = useDispatch();
 
 
-    const [country, setCountry] = useState()
+    const [country, setCountry] = useState();
     const [street, setStreet] = useState();
     const [city, setCity] = useState();
     const [state, setState] = useState();
@@ -22,29 +22,43 @@ const EditSpotForm = () => {
     const [description, setDescription] = useState();
     const [name, setName] = useState();
     const [price, setPrice] = useState();
+    const [prevImage, setPrevImage] = useState();
+    const [img1, setImg1] = useState();
+    const [img2, setImg2] = useState();
+    const [img3, setImg3] = useState();
+    const [img4, setImg4] = useState();
     const [errors, setErrors] = useState({});
 
-
     useEffect(() => {
-       dispatch(getSpotThunk(spotId));
+        dispatch(getSpotThunk(parseInt(spotId)));
     }, [dispatch, spotId]);
-
+    
     useEffect(() => {
         if (spot) {
-            setCountry(spot.country);
-            setStreet(spot.address);
-            setCity(spot.city);
-            setState(spot.state);
-            // setLatitude(spot.lat);
-            // setLongitude(spot.lng);
-            setDescription(spot.description);
-            setName(spot.name)
-            setPrice(spot.price)
+            const {
+                country,
+                address,
+                city,
+                state,
+                lat,
+                lng,
+                description,
+                name,
+                price
+            } = spot;
+    
+            setCountry(country);
+            setStreet(address);
+            setCity(city);
+            setState(state);
+            setLatitude(lat);
+            setLongitude(lng);
+            setDescription(description);
+            setName(name);
+            setPrice(price);
         }
-    },[spot])
-
-
-
+    }, [spot]);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const spotObj = {
@@ -57,63 +71,66 @@ const EditSpotForm = () => {
             // lng: longitude,
             description,
             name,
-            price,
+            price
         };
-
-        const errors = {}
+    
+        const errors = {};
         if (!country) {
-            errors.country = 'Country is required'
+            errors.country = 'Country is required';
         }
         if (!street) {
-            errors.street = 'Address is required'
+            errors.street = 'Address is required';
         }
         if (!city) {
-            errors.city = 'City is required'
+            errors.city = 'City is required';
         }
         if (!state) {
-            errors.state = 'State is required'
+            errors.state = 'State is required';
         }
-        // if (!latitude) {
-        //     errors.latitude = 'Latitude is required'
-        // }
-        // if (!longitude) {
-        //     errors.longitude = 'Longitude is required'
-        // }
+        if (!latitude) {
+            errors.latitude = 'Latitude is required';
+        }
+        if (!longitude) {
+            errors.longitude = 'Longitude is required';
+        }
         if (!description || description.length < 30) {
-            errors.description = 'Description needs a minimum of 30 characters'
+            errors.description = 'Description needs a minimum of 30 characters';
         }
         if (!name) {
-            errors.name = 'Name is required'
+            errors.name = 'Name is required';
         }
         if (!price) {
-            errors.price = 'Price is required'
+            errors.price = 'Price is required';
         }
-
-        const updatedSpot = await dispatch(updateSpotThunk(spotObj));
-
+    
+        const editedSpot = await dispatch(updateSpotThunk(spotObj));
+    
         if (Object.values(errors).length > 0) {
             setErrors(errors);
         } else {
-            history.push(`/spots/${updatedSpot.id}`)
+            history.push(`/spots/${editedSpot.id}`);
         }
-    }
-
+    };
+    
     if (!spot) return null;
+    if (spot.id === parseInt(spotId)) {
 
-    if (spot.id === spotId) {
+
         return (
+
             Object.keys(spot).length > 1 && (
                 <>
+
                     <div className='update-form'>
                         <form onSubmit={handleSubmit}>
                             <div className='location'>
-                                <h2>Update Spot</h2>
+                                <h2>Update your Spot</h2>
                                 <h3>Where's your place located?</h3>
                                 <h5>Guests will only get your exact address once they booked a reservation.</h5>
                                 <label>
                                     <div className='box'>
                                         Country
-                                        <br></br>
+                                        <br />
                                         <div className='errors'>{errors.country}</div>
                                     </div>
                                     <input
@@ -178,7 +195,6 @@ const EditSpotForm = () => {
                                                     placeholder='latitude'
                                                     min='-90'
                                                     max='90'
-                                                    step='any'
                                                     value={latitude}
                                                     onChange={(e) => setLatitude(e.target.value)}
                                                 /> ,
@@ -193,10 +209,9 @@ const EditSpotForm = () => {
                                         <div className='lng-input'>
                                             <input
                                                 type='number'
-                                                step='any'
+                                                placeholder='longitude'
                                                 min='-180'
                                                 max='180'
-                                                placeholder='longitude'
                                                 value={longitude}
                                                 onChange={(e) => setLongitude(e.target.value)}
                                             />
@@ -236,7 +251,6 @@ const EditSpotForm = () => {
                                         $ <input
                                             type='number'
                                             placeholder=' Price per night (USD)'
-                                            step='1'
                                             min='1'
                                             value={price}
                                             onChange={(e) => setPrice(e.target.value)}
@@ -245,13 +259,18 @@ const EditSpotForm = () => {
                                 </label>
                                 <div className='errors'>{errors.price}</div>
                             </div>
-                            <button type="submit">Update Spot</button>
+
+                            <button type="submit">Update your Spot</button>
                         </form>
                     </div>
+
                 </>
             )
         )
+
+
     }
+
 }
 
 export default EditSpotForm;
