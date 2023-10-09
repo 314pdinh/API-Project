@@ -184,10 +184,6 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             errors: {}
         }
 
-        if (!spotId) {
-            return res.status(400).json({ message: 'Invalid Spot'});
-        }
-
         if (!address) {
             comment.errors.address = 'Address is required'
         }
@@ -200,10 +196,10 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         if (!country) {
             comment.errors.country = 'Country is required'
         }
-        if (!lat || isNaN(lat)) {
+        if (!lat || typeof lat !== 'number') {
             comment.errors.lat = 'LAT is required'
         }
-        if (!lng || isNaN(lng)) {
+        if (!lng || typeof lng !== 'number') {
             comment.errors.lng = 'LNG is required'
         }
         if (!name) {
