@@ -18,8 +18,8 @@ module.exports = {
       country: 'United States',
       lat: 37.7641234,
       lng: 10.1508180,
-      name: 'Red',
-      description: "Welcome to my Star Wars-themed Airbnb! As your host, I'll guide you through an immersive experience in a galaxy far, far away.",
+      name: 'Charming City Studio',
+      description: "Discover a cozy urban retreat with modern amenities, perfect for solo travelers or couples exploring the city. Enjoy nearby attractions and vibrant nightlife, returning to a comfortable, intimate space.",
       price: 299.99
     },
     {
@@ -30,8 +30,8 @@ module.exports = {
       country: 'United States',
       lat: 79.7797794,
       lng: 10.2000009,
-      name: 'Yellow',
-      description: "Step into the cantina of my Star Wars-themed Airbnb, where you'll be greeted by the vibrant and diverse atmosphere of the galaxy.",
+      name: 'Beachfront Paradise',
+      description: "Immerse yourself in a beachfront oasis, waking up to stunning ocean views and direct beach access. Ideal for a tranquil coastal getaway, with the soothing sound of waves as your soundtrack.",
       price: 199.99
     },
     {
@@ -42,8 +42,8 @@ module.exports = {
       country: 'United States',
       lat: 33.7242424,
       lng: 10.1242428,
-      name: 'Blue',
-      description: "Calling all Jedi and Sith! Prepare to embark on an unforgettable adventure in my Star Wars-inspired Airbnb.",
+      name: 'Rustic Cabin in the Woods',
+      description: "Escape to nature in this secluded cabin, surrounded by trees and tranquility. Cozy up by the fireplace, reconnect with loved ones, and embrace the serenity of a rustic woodland retreat.",
       price: 299.99
     },
     {
@@ -54,8 +54,8 @@ module.exports = {
       country: 'United States',
       lat: 65.7179091,
       lng: 83.1401821,
-      name: 'Green',
-      description: "Welcome to your own private starship! My Star Wars-themed Airbnb offers a unique experience where you can stay in a replica of the Millennium Falcon.",
+      name: 'Luxury Penthouse with City Views',
+      description: "Indulge in opulent living in a high-rise penthouse, boasting panoramic city vistas and upscale furnishings. Experience the height of luxury while being in the heart of the urban buzz.",
       price: 524.99
     },
     {
@@ -66,8 +66,8 @@ module.exports = {
       country: 'United States',
       lat: 94.7258580,
       lng: 12.1402455,
-      name: 'White',
-      description: "Feel like royalty in my Star Wars-inspired palace! The grandeur and elegance of Naboo are replicated in every detail of this Airbnb.",
+      name: 'Historic Downtown Loft',
+      description: "Immerse in the city's heritage from a stylish downtown loft, just steps away from cultural landmarks and lively streets. Experience a blend of history and modern urban living in this chic accommodation.",
       price: 424.99
     },
     {
@@ -78,8 +78,8 @@ module.exports = {
       country: 'United States',
       lat: 55.7133491,
       lng: 63.2320131,
-      name: 'Purple',
-      description: "Looking for an otherworldly retreat? Look no further than my Jedi Temple-inspired Airbnb.",
+      name: 'Family-Friendly Suburban Home',
+      description: "Enjoy a spacious, child-friendly suburban home, perfect for families seeking a peaceful retreat. Relax in the backyard, explore nearby parks, and create lasting memories in this comfortable family space.",
       price: 399.99
     },
     {
@@ -90,8 +90,8 @@ module.exports = {
       country: 'United States',
       lat: 34.1747199,
       lng: 81.1794792,
-      name: 'Cyan',
-      description: "Attention, rebels and freedom fighters! This Rebel Alliance-themed Airbnb is your secret hideout in the heart of the galaxy.",
+      name: 'Architectural Marvel',
+      description: "Stay in an architecturally stunning house with a private pool and cutting-edge design. Experience a blend of artistry and luxury, indulging in a unique vacation home like no other.",
       price: 99.99
     },
     {
@@ -102,8 +102,8 @@ module.exports = {
       country: 'United States',
       lat: 34.1227199,
       lng: 21.1332792,
-      name: 'Pink',
-      description: "Welcome, scoundrels and smugglers, to my Star Wars underworld-inspired Airbnb!",
+      name: 'Ski-In, Ski-Out Chalet',
+      description: "Ideal for winter sports enthusiasts, this chalet provides direct access to the slopes for a ski adventure. Ski in and out, warm up by the fire, and relish a cozy retreat after a day on the slopes.",
       price: 49.99
     },
     {
@@ -114,8 +114,8 @@ module.exports = {
       country: 'United States',
       lat: 44.1722299,
       lng: 33.1990092,
-      name: 'Gold',
-      description: "Join fellow guests for lively discussions about the Force or engage in lightsaber duels.",
+      name: 'Elegant Wine Country Villa',
+      description: "Experience the ultimate wine-tasting adventure from this luxurious villa nestled in a renowned wine region. Savor exquisite wines, tour vineyards, and relax in elegance in the heart of wine country.",
       price: 99.99
     },
    ], {})
