@@ -102,7 +102,6 @@ export const updateSpotThunk = (spot) => async (dispatch) => {
   try {
     console.log("Update Spot Thunk called with spot:", spot);
     console.log("Spot ID: ", spot.id);
-    
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
