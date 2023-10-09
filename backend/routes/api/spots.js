@@ -184,6 +184,10 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             errors: {}
         }
 
+        if (!spotId) {
+            return res.status(400).json({ message: 'Invalid Spot'});
+        }
+        
         if (!address) {
             comment.errors.address = 'Address is required'
         }
