@@ -53,12 +53,6 @@ const SpotId = () => {
 
   const shouldRenderReviewForm = !userId && newReviewList.length === 0;
 
-
-
-
-
-
-
   if (!userId) {
     if (newReviewList.length === 0) {
       return (
@@ -432,4 +426,3 @@ const SpotId = () => {
 };
 
 export default SpotId;
-

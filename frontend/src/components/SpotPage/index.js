@@ -10,7 +10,7 @@ const Spots = () => {
   const dispatch = useDispatch();
   const allSpots = useSelector(state => Object.values(state.spots.allSpots));
   const spotVal = Object.values(allSpots);
-  
+
 
 
   useEffect(() => {
@@ -35,16 +35,13 @@ const Spots = () => {
                 </div>
                 <div className='list'>
                   <div className='star'>
-                    <li>{spot.city}, {spot.state}</li>
+                    <p>{spot.city}, {spot.state}</p>
                     {!spot.avgRating && <li>★ New</li>}
                     {spot.avgRating && <li>★ {spot.avgRating.toFixed(1)}</li>}
                   </div>
-                  <li>
-                    <b>
-                      ${spot.price}
-
-                    </b>
-                    night</li>
+                  <p>
+                    <b>${spot.price}</b> night
+                  </p>
                 </div>
               </Link>
             </div>

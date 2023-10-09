@@ -2,6 +2,15 @@
     display: none;
 }
 
+.TitleHeader {
+    font-weight: 400;
+    text-decoration: none;
+    color: #22930e;
+    font-size: 40px;
+    display: flex;
+    margin-left: 35px;
+}
+
 li {
     display: flex;
     flex-direction: column;

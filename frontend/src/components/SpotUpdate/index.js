@@ -17,8 +17,8 @@ const UpdateSpot = () => {
     const [street, setStreet] = useState();
     const [city, setCity] = useState();
     const [state, setState] = useState();
-    const [latitude, setLatitude] = useState();
-    const [longitude, setLongitude] = useState();
+    const [latitude, setLatitude] = useState(1);
+    const [longitude, setLongitude] = useState(1);
     const [description, setDescription] = useState();
     const [name, setName] = useState();
     const [price, setPrice] = useState();
@@ -67,8 +67,8 @@ const UpdateSpot = () => {
             address: street,
             city,
             state,
-            lat: latitude,
-            lng: longitude,
+            // lat: latitude,
+            // lng: longitude,
             description,
             name,
             price
@@ -273,4 +273,4 @@ const UpdateSpot = () => {
 
 }
 
-export default UpdateSpot;
+export default EditSpotForm;
