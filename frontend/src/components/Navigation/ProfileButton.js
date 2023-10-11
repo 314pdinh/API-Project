@@ -39,32 +39,34 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
     closeMenu();
     history.push('/')
-    
+
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      <div className="new-spot-link">
-        <div>
-          <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>
-            Create a New Spot
-          </NavLink>
-        </div>
-      </div>
 
       <button onClick={openMenu} id='profile-button'>
         <i className="fas fa-user-circle" />
       </button>
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <p>Hello, {user.firstName}</p>
             <p>{user.email}</p>
-            <NavLink to='/spots/current' style={{ textDecoration: 'none' }}>
-              Manage Spot
-            </NavLink>
+
+            <div style={{ borderTop: "2px solid #000000", marginTop: 10, marginBottom: 3, marginLeft: 6, marginRight: 6 }}></div>
+            <li>
+
+              <NavLink to='/spots/current' style={{ textDecoration: 'none' }}>
+                Manage Spot
+              </NavLink>
+            </li>
+
+            <div style={{ borderTop: "2px solid #000000", marginTop: 10, marginBottom: 3, marginLeft: 6, marginRight: 6 }}></div>
+
             <p>
 
             </p>
