@@ -55,10 +55,52 @@ a:hover {
 }
 
 .profile-dropdown {
-    margin-top: 0.5rem;
-    border: 1px solid black;
+    margin-top: .5rem;
+    border: 1px solid #ccc;
     position: absolute;
-    background-color: whitesmoke;
+    background-color: rgb(255, 255, 255);
     top: 70px;
     right: 40px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.profile-dropdown.hidden {
+    display: none;
+}
+
+.profile-dropdown p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.profile-dropdown li {
+  padding: 10px 20px;
+  font-size: 17px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.profile-dropdown li:hover {
+    background-color: #f7f7f7;
+    color: #ff385c;
+  }
+
+.profile-dropdown a {
+    text-decoration: none;
+    color: #000;
+}
+
+.profile-dropdown button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f44336;
+    color: #fff;
+    cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+    background-color: #d32f2f;
 }
