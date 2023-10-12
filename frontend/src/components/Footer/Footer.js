@@ -8,34 +8,34 @@ const Footer = () => {
                 <div className="footer-section">
                     <ul>
                         <li style={{ fontWeight: 'bold', fontSize: '18px' }}>Support</li>
-                        <li><a href="/">HelpCenter</a></li>
-                        <li><a href="/">AirCover</a></li>
-                        <li><a href="/">Anti-discrimination</a></li>
-                        <li><a href="/">Disability support</a></li>
-                        <li><a href="/">Cancellation options</a></li>
-                        <li><a href="/">Report neighborhood concern</a></li>
+                        <li><a href="/e">HelpCenter</a></li>
+                        <li><a href="/e">AirCover</a></li>
+                        <li><a href="/e">Anti-discrimination</a></li>
+                        <li><a href="/e">Disability support</a></li>
+                        <li><a href="/e">Cancellation options</a></li>
+                        <li><a href="/e">Report neighborhood concern</a></li>
                     </ul>
                 </div>
                 <div className="footer-section">
                     <ul>
                         <li style={{ fontWeight: 'bold', fontSize: '18px' }}>Hosting</li>
-                        <li><a href="/">Airbnb your home</a></li>
-                        <li><a href="/">AirCover for Hosts</a></li>
-                        <li><a href="/">Hosting resources</a></li>
-                        <li><a href="/">Community forum</a></li>
-                        <li><a href="/">Hosting responsibility</a></li>
-                        <li><a href="/">Airbnb-friendly apartments</a></li>
+                        <li><a href="/e">Airbnb your home</a></li>
+                        <li><a href="/e">AirCover for Hosts</a></li>
+                        <li><a href="/e">Hosting resources</a></li>
+                        <li><a href="/e">Community forum</a></li>
+                        <li><a href="/e">Hosting responsibility</a></li>
+                        <li><a href="/e">Airbnb-friendly apartments</a></li>
                     </ul>
                 </div>
                 <div className="footer-section">
                     <ul>
                         <li style={{ fontWeight: 'bold', fontSize: '18px' }}>About</li>
-                        <li><a href="/">Newsroom</a></li>
-                        <li><a href="/">new features</a></li>
-                        <li><a href="/">Careers</a></li>
-                        <li><a href="/">Investors</a></li>
-                        <li><a href="/">Gift cards</a></li>
-                        <li><a href="/">Airbnb.org emergency stays</a></li>
+                        <li><a href="/e">Newsroom</a></li>
+                        <li><a href="/e">new features</a></li>
+                        <li><a href="/e">Careers</a></li>
+                        <li><a href="/e">Investors</a></li>
+                        <li><a href="/e">Gift cards</a></li>
+                        <li><a href="/e">Airbnb.org emergency stays</a></li>
                     </ul>
                 </div>
             </div>
