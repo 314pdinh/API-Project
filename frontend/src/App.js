@@ -10,6 +10,7 @@ import CreateForm from './components/SpotNew';
 import ManageSpot from './components/SpotManage';
 import UpdateSpotForm from './components/SpotUpdate';
 import Footer from "./components/Footer/Footer";
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,26 +22,27 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path='/spots/new'>
-            <CreateForm />
-          </Route>
-          <Route path='/spots/current'>
-            <ManageSpot />
-          </Route>
-          <Route path="/spots/:spotId/edit">
-            <UpdateSpotForm />
-          </Route>
-          <Route path='/spots/:spotId'>
-            <SpotId />
-          </Route>
-          <Route exact path='/'>
-            <Spots />
-          </Route>
-        </Switch>
-      )}
-      {isLoaded && <Footer />}
+      <Switch>
+        <Route path='/spots/new'>
+          <CreateForm />
+        </Route>
+        <Route path='/spots/current'>
+          <ManageSpot />
+        </Route>
+        <Route path="/spots/:spotId/edit">
+          <UpdateSpotForm />
+        </Route>
+        <Route path='/spots/:spotId'>
+          <SpotId />
+        </Route>
+        <Route exact path='/'>
+          <Spots />
+        </Route>
+        <Route path='*'>
+          <ErrorPage />
+        </Route>
+      </Switch>
+      <Footer />
     </>
   );
 }
