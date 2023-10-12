@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSpotsThunk } from "../../store/spot";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 import './Spots.css';
 
 const Spots = () => {
