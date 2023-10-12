@@ -16,9 +16,9 @@ function Navigation({ isLoaded }) {
             <div className='airBNB'>
               <li>
                 <NavLink className='TitleHeader' exact to="/">
-                  <i className="fa-solid" >
-                    GlobeHut
+                <i class="fa-solid fa-earth-america fa-spin">
                   </i>
+                    GlobeHut
                 </NavLink>
               </li>
             </div>
@@ -50,16 +50,16 @@ function Navigation({ isLoaded }) {
           <div className='airBNB'>
             <li>
               <NavLink className='TitleHeader' exact to="/">
-                <i className="fa-solid" >
-                  GlobeHut
+                <i class="fa-solid fa-earth-americas">
                 </i>
+                  GlobeHut
               </NavLink>
             </li>
           </div>
           {isLoaded && (
-              <li>
-                <ProfileButton user={sessionUser} />
-              </li>
+            <li>
+              <ProfileButton user={sessionUser} />
+            </li>
           )}
         </div>
       </div>
