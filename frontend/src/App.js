@@ -9,7 +9,7 @@ import SpotId from './components/SpotId';
 import CreateForm from './components/SpotNew';
 import ManageSpot from './components/SpotManage';
 import UpdateSpotForm from './components/SpotUpdate';
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded &&
+      {isLoaded && (
         <Switch>
           <Route path='/spots/new'>
             <CreateForm />
@@ -38,7 +38,9 @@ function App() {
           <Route exact path='/'>
             <Spots />
           </Route>
-        </Switch>}
+        </Switch>
+      )}
+      {isLoaded && <Footer />}
     </>
   );
 }
