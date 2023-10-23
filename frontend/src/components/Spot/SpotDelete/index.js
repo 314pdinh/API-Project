@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSpotThunk, getAllSpotsThunk, deleteSpotThunk } from "../../store/spot";
-import { useModal } from "../../context/Modal";
-import { getReviewsThunk } from "../../store/review";
+import { getSpotThunk, getAllSpotsThunk, deleteSpotThunk } from "../../../store/spot";
+import { useModal } from "../../../context/Modal";
+import { getReviewsThunk } from "../../../store/review";
 import { useParams } from "react-router-dom";
 import './deleteSpot.css';
 

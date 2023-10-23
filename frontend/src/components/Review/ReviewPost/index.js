@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postReviewThunk } from "../../store/review";
-import { useModal } from "../../context/Modal";
-import { getSpotThunk } from "../../store/spot";
+import { postReviewThunk } from "../../../store/review";
+import { useModal } from "../../../context/Modal";
+import { getSpotThunk } from "../../../store/spot";
 import './postReview.css';
 
 const PostReview = ({ spot }) => {
