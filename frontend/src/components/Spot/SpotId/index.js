@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSpotThunk, getAllSpotsThunk } from "../../store/spot";
-import { getReviewsThunk } from "../../store/review";
+import { getSpotThunk, getAllSpotsThunk } from "../../../store/spot";
+import { getReviewsThunk } from "../../../store/review";
 import SpotIdReview from "./SpotReview";
 import { useParams } from "react-router-dom";
 import SpotImages from "./SpotImages";
 import SpotReviews from "./SpotReview";
-import OpenModalMenuItem from '../OpenModalButton'
-import PostReview from "../ReviewPost";
+import OpenModalMenuItem from '../../OpenModalButton'
+import PostReview from "../../Review/ReviewPost";
 import './Spot.css';
 
 const SpotId = () => {

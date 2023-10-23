@@ -4,11 +4,11 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
-import Spots from './components/SpotPage';
-import SpotId from './components/SpotId';
-import CreateForm from './components/SpotNew';
-import ManageSpot from './components/SpotManage';
-import UpdateSpotForm from './components/SpotUpdate';
+import Spots from './components/Spot/SpotPage';
+import SpotId from './components/Spot/SpotId';
+import CreateForm from './components/Spot/SpotNew';
+import ManageSpot from './components/Spot/SpotManage';
+import UpdateSpotForm from './components/Spot/SpotUpdate';
 import Footer from "./components/Footer/Footer";
 import ErrorPage from './components/ErrorPage/ErrorPage';
 
