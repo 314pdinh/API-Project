@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpotsThunk, getCurrentUserSpot } from "../../store/spot";
+import { getAllSpotsThunk, getCurrentUserSpot } from "../../../store/spot";
 import { NavLink, useHistory, Link } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import OpenModalButton from "../../OpenModalButton";
+import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
 import DeleteSpot from "../SpotDelete";
 
 import './manageSpot.css';

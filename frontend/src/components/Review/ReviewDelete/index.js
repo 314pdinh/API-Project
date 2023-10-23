@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getSpotThunk } from "../../store/spot";
-import { useModal } from "../../context/Modal";
-import { getReviewsThunk, deleteReviewThunk } from "../../store/review";
+import { getSpotThunk } from "../../../store/spot";
+import { useModal } from "../../../context/Modal";
+import { getReviewsThunk, deleteReviewThunk } from "../../../store/review";
 
 function DeleteReview({ spot, review }) {
     const dispatch = useDispatch();
