@@ -5,7 +5,6 @@ import { NavLink, useHistory, Link } from "react-router-dom";
 import OpenModalButton from "../../OpenModalButton";
 import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
 import DeleteSpot from "../SpotDelete";
-
 import './manageSpot.css';
 
 const ManageSpot = () => {
