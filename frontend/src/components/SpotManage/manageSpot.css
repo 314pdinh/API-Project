@@ -1,7 +1,7 @@
-ul button {
+/* ul button {
     width: 75px;
     height: 30px;
-}
+} */
 
 .manage h1 {
     margin-left: 3rem;
@@ -24,6 +24,8 @@ ul button {
 .buttons-del-update a {
     background-color: gray;
     color: white;
+    width: 75px;
+    height: 30px;
 }
 
 
