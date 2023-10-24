@@ -3,21 +3,23 @@
     margin-bottom: 1rem;
 }
 
-img {
-    border-radius: 5px;
-}
-
 .spot-box h1 {
     font-size: 30px;
     margin-bottom: 1rem;
 }
 
+.spot-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #fff;
+  }
+
 .box {
-    margin-left: 4rem;
-    margin-right: 4rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
 
 .host-side h2 {
     margin-bottom: 1rem;
@@ -43,16 +45,6 @@ img {
     border-radius: 8px;
 }
 
-.reserve button {
-    width: 300px;
-    height: 40px;
-    border-radius: none;
-    background-color: rgb(42, 101, 249);
-    color: white;
-    box-shadow: 1px 1px 1px 1px black;
-    margin: 1rem;
-}
-
 .host {
     display: flex;
     flex-direction: column;
@@ -64,14 +56,20 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
+    max-width: 1150px;
 }
 
-.img1 {
-    width: 670px;
+.img1 img,
+.img2 img {
+  border-radius: 5px;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .img1 img {
-    height: 400px;
+    max-height: 400px;
     width: 100%;
 }
 
@@ -80,11 +78,11 @@ img {
     grid-template-columns: 1fr 1fr;
     row-gap: 0.5rem;
     column-gap: 0.5rem;
-    width: 670px;
+    width: 650px;
 }
 
 .img2 img {
-    height: 200px;
+    height: 195px;
     width: 100%;
 }
 

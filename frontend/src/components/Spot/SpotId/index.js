@@ -8,6 +8,7 @@ import SpotImages from "./SpotImages";
 import SpotReviews from "./SpotReview";
 import OpenModalMenuItem from '../../OpenModalButton'
 import PostReview from "../../Review/ReviewPost";
+import BookingCreate from "../../Booking/BookingCreate/BookingCreate";
 import './Spot.css';
 
 const SpotId = () => {
@@ -40,9 +41,9 @@ const SpotId = () => {
 
   const closeMenu = () => setShowMenu(false);
 
-  const reserve = () => {
-    window.alert('Feature Coming Soon...');
-  };
+  // const reserve = () => {
+  //   window.alert('Feature Coming Soon...');
+  // };
 
   if (!spot || !reviewObj || !spot.Owner) {
     return null;
@@ -78,7 +79,8 @@ const SpotId = () => {
                       <div>$ {spot.price} night</div>
                       <div>★ New</div>
                     </div>
-                    <button onClick={reserve}>Reserve</button>
+                    <BookingCreate />
+                    {/* <button onClick={reserve}>Reserve</button> */}
                   </div>
                 </div>
               </div>
@@ -117,7 +119,10 @@ const SpotId = () => {
                         <div>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</div>
                       }
                     </div>
-                    <button onClick={reserve}>Reserve</button>
+                    <BookingCreate />
+
+
+                    {/* <button onClick={reserve}>Reserve</button> */}
                   </div>
                 </div>
 
@@ -164,7 +169,10 @@ const SpotId = () => {
                       <div>$ {spot.price} night</div>
                       <div>★ New</div>
                     </div>
-                    <button onClick={reserve}>Reserve</button>
+                    <BookingCreate />
+
+
+                    {/* <button onClick={reserve}>Reserve</button> */}
                   </div>
                 </div>
               </div>
@@ -216,7 +224,11 @@ const SpotId = () => {
                         <div>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</div>
                       }
                     </div>
-                    <button onClick={reserve}>Reserve</button>
+
+                    <BookingCreate />
+
+
+                    {/* <button onClick={reserve}>Reserve</button> */}
                   </div>
 
                 </div>
@@ -277,7 +289,7 @@ const SpotId = () => {
                         <div>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</div>
                       }
                     </div>
-                    <button onClick={reserve}>Reserve</button>
+                    {/* <button onClick={reserve}>Reserve</button> */}
                   </div>
                 </div>
 
@@ -289,6 +301,9 @@ const SpotId = () => {
                 }
 
               </div>
+
+              <BookingCreate />
+
               <div className='new-post'>
                 <div className='post-review-modal'>
                   <OpenModalMenuItem
@@ -343,7 +358,10 @@ const SpotId = () => {
                         <div>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</div>
                       }
                     </div>
-                    <button onClick={reserve}>Reserve</button>
+
+                    <BookingCreate />
+
+                    {/* <button onClick={reserve}>Reserve</button> */}
                   </div>
                 </div>
               </div>
@@ -398,7 +416,12 @@ const SpotId = () => {
                       <div>★ {spot.avgStarRating.toFixed(1)} · {newReviewList.length} reviews</div>
                     }
                   </div>
-                  <button onClick={reserve}>Reserve</button>
+
+                  <BookingCreate />
+
+
+                  {/* <button onClick={reserve}>Reserve</button> */}
+
                 </div>
               </div>
             </div>
