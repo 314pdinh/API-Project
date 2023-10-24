@@ -1,0 +1,29 @@
+.booking-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-box {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.form-date {
+    margin-bottom: 15px;
+}
+
+.form-date input {
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 10px;
+}
+
+.form-date label {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
