@@ -95,55 +95,62 @@ router.get('/:spotId', async (req, res, next) => {
 
 // CREATE A SPOT 
 router.post('/', requireAuth, async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    try {
 
-    const comment = { message: 'Bad Request', errors: {} };
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-    if (!address) {
-        comment.errors.address = 'Street address is required'
-    }
-    if (!city) {
-        comment.errors.city = 'City is required'
-    }
-    if (!state) {
-        comment.errors.state = 'State is required'
-    }
-    if (!country) {
-        comment.errors.country = 'Country is required'
-    }
-    if (!lat || typeof lat !== 'number') {
-        comment.errors.lat = 'LAT is required'
-    }
-    if (!lng || typeof lng !== 'number') {
-        comment.errors.lng = 'LNG is required'
-    }
-    if (!name || name.length > 50) {
-        comment.errors.name = 'Name is required'
-    }
-    if (!description) {
-        comment.errors.description = 'Description is required'
-    }
-    if (!price) {
-        comment.errors.price = 'Price is required'
+        const comment = { message: 'Bad Request', errors: {} };
+
+        if (!address) {
+            comment.errors.address = 'Street address is required'
+        }
+        if (!city) {
+            comment.errors.city = 'City is required'
+        }
+        if (!state) {
+            comment.errors.state = 'State is required'
+        }
+        if (!country) {
+            comment.errors.country = 'Country is required'
+        }
+        if (!lat || typeof lat !== 'number') {
+            comment.errors.lat = 'LAT is required'
+        }
+        if (!lng || typeof lng !== 'number') {
+            comment.errors.lng = 'LNG is required'
+        }
+        if (!name || name.length > 50) {
+            comment.errors.name = 'Name is required'
+        }
+        if (!description) {
+            comment.errors.description = 'Description is required'
+        }
+        if (!price) {
+            comment.errors.price = 'Price is required'
+        }
+
+        if (Object.keys(comment.errors).length) {
+            return res.status(400).json({ message: comment.message, errors: comment.errors })
+        }
+        const newSpot = await Spot.create({
+            ownerId: req.user.id,
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        });
+        
+        return res.status(201).json(newSpot)
+
+    } catch (e) {
+        next(e)
     }
 
-    if (Object.keys(comment.errors).length) {
-        return res.status(400).json({ message: comment.message, errors: comment.errors })
-    }
-    const newSpot = await Spot.create({
-        ownerId: req.user.id,
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price
-    })
-
-    return res.status(201).json(newSpot)
 })
 
 // Add an Image to a Spot based on the Spot's id
@@ -175,49 +182,49 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     const { user } = req
 
     // if (spotId) {
-        if (spotId.ownerId !== user.id) {
-            return res.status(403).json({ message: 'Only the owner can edit this spot' })
-        }
+    if (spotId.ownerId !== user.id) {
+        return res.status(403).json({ message: 'Only the owner can edit this spot' })
+    }
 
-        const comment = {
-            message: 'Bad Request',
-            errors: {}
-        }
+    const comment = {
+        message: 'Bad Request',
+        errors: {}
+    }
 
-        if (!spotId) {
-            return res.status(400).json({ message: 'Invalid Spot' });
-        }
+    if (!spotId) {
+        return res.status(400).json({ message: 'Invalid Spot' });
+    }
 
-        if (!address) {
-            comment.errors.address = 'Address is required'
-        }
-        if (!city) {
-            comment.errors.city = 'City is required'
-        }
-        if (!state) {
-            comment.errors.state = 'State is required'
-        }
-        if (!country) {
-            comment.errors.country = 'Country is required'
-        }
-        if (!lat || isNaN(lat)) {
-            comment.errors.lat = 'LAT is required'
-        }
-        if (!lng || isNaN(lng)) {
-            comment.errors.lng = 'LNG is required'
-        }
-        if (!name) {
-            comment.errors.name = 'Name is required'
-        }
-        if (!description) {
-            comment.errors.description = 'Description is required'
-        }
-        if (!price) {
-            comment.errors.price = 'Price is required'
-        }
-        if (Object.keys(comment.errors).length) {
-            return res.status(400).json({ message: comment.message, errors: comment.errors })
-        }
+    if (!address) {
+        comment.errors.address = 'Address is required'
+    }
+    if (!city) {
+        comment.errors.city = 'City is required'
+    }
+    if (!state) {
+        comment.errors.state = 'State is required'
+    }
+    if (!country) {
+        comment.errors.country = 'Country is required'
+    }
+    if (!lat || isNaN(lat)) {
+        comment.errors.lat = 'LAT is required'
+    }
+    if (!lng || isNaN(lng)) {
+        comment.errors.lng = 'LNG is required'
+    }
+    if (!name) {
+        comment.errors.name = 'Name is required'
+    }
+    if (!description) {
+        comment.errors.description = 'Description is required'
+    }
+    if (!price) {
+        comment.errors.price = 'Price is required'
+    }
+    if (Object.keys(comment.errors).length) {
+        return res.status(400).json({ message: comment.message, errors: comment.errors })
+    }
     // } else {
     //     res.status(404).json({ message: 'Invalid Spot' });
 
