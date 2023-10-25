@@ -10,6 +10,7 @@ import CreateForm from './components/Spot/SpotNew';
 import ManageSpot from './components/Spot/SpotManage';
 import UpdateSpotForm from './components/Spot/SpotUpdate';
 import Footer from "./components/Footer/Footer";
+import BookingUsers from './components/Booking/BookingUsers/BookingUsers';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route path='/spots/:spotId'>
           <SpotId />
+        </Route>
+        <Route path='/bookings/current'>
+          <BookingUsers />
         </Route>
         <Route exact path='/'>
           <Spots />
