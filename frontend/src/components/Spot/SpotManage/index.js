@@ -50,6 +50,8 @@ const ManageSpot = () => {
 
     return (
         <main>
+            <div className="manage-outer-container">
+
             <div className="manage">
                 <h1>Manage Your Spots</h1>
                 <button onClick={create}>
@@ -58,7 +60,7 @@ const ManageSpot = () => {
                     </b>
                 </button>
             </div>
-            <ul>
+            <ul className="manage-spots-container">
                 {newList.length > 0 && newList.map(spot => (
                     <div key={spot.id} className="spot">
                         <Link to={`/spots/${spot.id}`}>
@@ -92,6 +94,8 @@ const ManageSpot = () => {
                     </div>
                 ))}
             </ul>
+            </div>
+
         </main>
     );
 }

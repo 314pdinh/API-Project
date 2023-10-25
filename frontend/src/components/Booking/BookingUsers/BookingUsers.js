@@ -41,7 +41,7 @@ const BookingUsers = () => {
                 </div>
                 <ul className="bookings-list">
                     {bookingList.length > 0 && bookingList.map(booking => (
-                        <div key={booking.id} className="review">
+                        <div key={booking.id} className="booking-card">
                             <h3>{booking.Spot.name ? booking.Spot.name : undefined}</h3>
 
                             <img src={booking.Spot.previewImage} alt="Spot Preview" />

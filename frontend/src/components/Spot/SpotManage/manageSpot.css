@@ -1,7 +1,8 @@
-/* ul button {
-    width: 75px;
-    height: 30px;
-} */
+.manage-outer-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 .manage h1 {
     margin-left: 3rem;
@@ -9,6 +10,10 @@
 
 .manage {
     margin: 2rem;
+}
+
+.manage-spots-container {
+    margin: 5rem;
 }
 
 .manage button {
