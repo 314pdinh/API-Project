@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSpotsThunk, getCurrentUserSpot } from "../../../store/spot";
+import { getCurrentUserSpotThunk } from "../../../store/spot";
 import { NavLink, useHistory, Link } from "react-router-dom";
 import OpenModalButton from "../../OpenModalButton";
 import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
@@ -11,15 +12,24 @@ const ManageSpot = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const spotObj = useSelector(state => state.spots.allSpots);
+    
     const user = useSelector(state => state.session.user);
 
-    const spotList = useSelector(state => Object.values(state.spots.allSpots));
+    
+
+    // const spotList = useSelector(state => Object.values(spotObj));
+
+    const spotList = useSelector(state => {
+        console.log("All Spots from Redux State:", state.spots.allSpots);
+        return Object.values(state.spots.allSpots);
+    });
+
     const [menu, setMenu] = useState(false);
 
     const newList = spotList.filter(spot => spot.ownerId === user.id);
 
     useEffect(() => {
-        dispatch(getCurrentUserSpot());
+        dispatch(getCurrentUserSpotThunk());
     }, [dispatch]);
 
     useEffect(() => {

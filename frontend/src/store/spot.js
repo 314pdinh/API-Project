@@ -65,10 +65,12 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
 };
 
 export const getCurrentUserSpotThunk = () => async (dispatch) => {
+  console.log('getCurrentUserSpotThunk called');
   const response = await csrfFetch('/api/spots/current');
 
   if (response.ok) {
     const userSpots = await response.json();
+    console.log('User Spots Data------------:', userSpots);
     dispatch(getCurrentUserSpot(userSpots));
   }
 };
@@ -163,25 +165,22 @@ const spotReducer = (state = initialState, action) => {
 
 
     case GET_CURRENT_USER_SPOT: {
-      const allSpots = { ...state.allSpots };
 
-      if (action.spots && action.spots.Spots) {
-        action.spots.Spots.forEach(spot => {
-          allSpots[spot.id] = spot;
-        });
-      }
-
-      return { ...state, allSpots };
+      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};
+      action.spots.Spots.forEach((spot) => {
+        newState.allSpots[spot.id] = spot;
+      });
+      return newState;
     }
 
 
     case UPDATE_SPOT: {
-      console.log("Reducer - UPDATE_SPOT action:", action);
-      console.log("Reducer - Current state:", state);
-      console.log("Reducer - action.spot:", action.spot);
-      console.log("updateSpot Reducer - newState", newState)
-      
-      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot, ...action.spot }};
+      // console.log("Reducer - UPDATE_SPOT action:", action);
+      // console.log("Reducer - Current state:", state);
+      // console.log("Reducer - action.spot:", action.spot);
+      // console.log("updateSpot Reducer - newState", newState)
+
+      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot, ...action.spot } };
       return newState;
     }
 
