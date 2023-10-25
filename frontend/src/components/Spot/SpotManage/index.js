@@ -44,9 +44,9 @@ const ManageSpot = () => {
         history.push('/spots/new');
     };
 
-    // if (!newList) {
-    //     return null;
-    // }
+    if (!newList) {
+        return null;
+    }
 
     return (
         <main>
