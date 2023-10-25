@@ -27,3 +27,8 @@
     margin-bottom: 5px;
 }
 
+.booking-error {
+    color: #ff1900;
+    font-size: 20px;
+    margin-top: 5px;
+}

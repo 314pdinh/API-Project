@@ -68,6 +68,15 @@ function ProfileButton({ user }) {
 
             <div style={{ borderTop: "2px solid #000000", marginTop: 10, marginBottom: 3, marginLeft: 6, marginRight: 6 }}></div>
 
+            <li>
+
+              <NavLink to='/bookings/current' style={{ textDecoration: 'none' }}>
+                Manage Bookings
+              </NavLink>
+            </li>
+
+            <div style={{ borderTop: "2px solid #000000", marginTop: 10, marginBottom: 3, marginLeft: 6, marginRight: 6 }}></div>
+
             <p>
 
             </p>
