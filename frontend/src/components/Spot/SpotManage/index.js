@@ -17,12 +17,8 @@ const ManageSpot = () => {
 
     
 
-    // const spotList = useSelector(state => Object.values(spotObj));
+    const spotList = useSelector(state => Object.values(spotObj));
 
-    const spotList = useSelector(state => {
-        console.log("All Spots from Redux State:", state.spots.allSpots);
-        return Object.values(state.spots.allSpots);
-    });
 
     const [menu, setMenu] = useState(false);
 
