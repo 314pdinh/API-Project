@@ -174,7 +174,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
     const { user } = req
 
-    if (spotId) {
+    // if (spotId) {
         if (spotId.ownerId !== user.id) {
             return res.status(403).json({ message: 'Only the owner can edit this spot' })
         }
@@ -185,7 +185,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         }
 
         if (!spotId) {
-            return res.status(400).json({ message: 'Invalid Spot'});
+            return res.status(400).json({ message: 'Invalid Spot' });
         }
 
         if (!address) {
@@ -218,10 +218,10 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         if (Object.keys(comment.errors).length) {
             return res.status(400).json({ message: comment.message, errors: comment.errors })
         }
-    } else {
-        res.status(404).json({ message: 'Invalid Spot' });
+    // } else {
+    //     res.status(404).json({ message: 'Invalid Spot' });
 
-    }
+    // }
 
     await spotId.update({
         ownerId: req.user.id,
