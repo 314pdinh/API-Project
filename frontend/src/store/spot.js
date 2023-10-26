@@ -160,13 +160,14 @@ const spotReducer = (state = initialState, action) => {
 
 
     case GET_SPOT: {
+      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } }
       return { ...state, singleSpot: { ...action.spot } };
     }
 
 
     case GET_CURRENT_USER_SPOT: {
 
-      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};
+      const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
       action.spots.Spots.forEach((spot) => {
         newState.allSpots[spot.id] = spot;
       });
