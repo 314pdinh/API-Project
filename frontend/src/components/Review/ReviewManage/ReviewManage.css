@@ -1,0 +1,22 @@
+.manage-outer-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.manage h1 {
+    margin-left: 3rem;
+}
+
+.manage {
+    margin: 2rem;
+}
+
+.manage-reviews-container {
+    margin: 5rem;
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+}

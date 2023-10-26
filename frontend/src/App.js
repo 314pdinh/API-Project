@@ -8,6 +8,7 @@ import Spots from './components/Spot/SpotPage';
 import SpotId from './components/Spot/SpotId';
 import CreateForm from './components/Spot/SpotNew';
 import ManageSpot from './components/Spot/SpotManage';
+import ManageReview from "./components/Review/ReviewManage/ReviewManage";
 import UpdateSpotForm from './components/Spot/SpotUpdate';
 import Footer from "./components/Footer/Footer";
 import BookingUsers from './components/Booking/BookingUsers/BookingUsers';
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route path='/spots/current'>
           <ManageSpot />
+        </Route>
+        <Route path='/reviews/current'>
+          <ManageReview />
         </Route>
         <Route path="/spots/:spotId/edit">
           <UpdateSpotForm />

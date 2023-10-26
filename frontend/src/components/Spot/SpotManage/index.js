@@ -22,7 +22,8 @@ const ManageSpot = () => {
 
     const [menu, setMenu] = useState(false);
 
-    const newList = spotList.filter(spot => spot.ownerId === user.id);
+    // const newList = spotList.filter(spot => spot.ownerId === user.id);
+    const newList = spotList.filter(spot => spot.ownerId === (user ? user.id : null));
 
     useEffect(() => {
         dispatch(getCurrentUserSpotThunk());
@@ -76,7 +77,8 @@ const ManageSpot = () => {
                             <div className='list'>
                                 <div className='star'>
                                     <li>{spot.city}, {spot.state}</li>
-                                    <li>★ {spot.avgRating.toFixed((1))}</li>
+                                    {spot.avgRating > 0 && <li>★ {spot.avgRating}.0</li>}
+                                    {!spot.avgRating && <li>★ New</li>}
                                 </div>
                                 <li>${spot.price} night</li>
                             </div>
