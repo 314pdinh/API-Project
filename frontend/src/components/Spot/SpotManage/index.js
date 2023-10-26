@@ -17,7 +17,7 @@ const ManageSpot = () => {
 
     
 
-    const spotList = useSelector(state => Object.values(spotObj));
+    const spotList = Object.values(spotObj);
 
 
     const [menu, setMenu] = useState(false);
