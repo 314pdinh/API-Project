@@ -73,7 +73,7 @@ const SpotId = () => {
                     <div>{spot.description}</div>
                   </div>
                 </div>
-                <div className="review">
+                <div className="comp">
                   <div className='reserve'>
                     <div className='money'>
                       <div>$ {spot.price} night</div>
@@ -108,7 +108,7 @@ const SpotId = () => {
                     <div>{spot.description}</div>
                   </div>
                 </div>
-                <div className="review">
+                <div className="comp">
                   <div className='reserve'>
                     <div className='money'>
                       <div>$ {spot.price} night</div>
@@ -163,7 +163,7 @@ const SpotId = () => {
                     <div>{spot.description}</div>
                   </div>
                 </div>
-                <div className="review">
+                <div className="comp">
                   <div className='reserve'>
                     <div className='money'>
                       <div>$ {spot.price} night</div>
@@ -213,7 +213,7 @@ const SpotId = () => {
                     <div>{spot.description}</div>
                   </div>
                 </div>
-                <div className="review">
+                <div className="comp">
                   <div className='reserve'>
                     <div className='money'>
                       <div>$ {spot.price} night</div>
@@ -278,7 +278,7 @@ const SpotId = () => {
                     <div>{spot.description}</div>
                   </div>
                 </div>
-                <div className="review">
+                <div className="comp">
                   <div className='reserve'>
                     <div className='money'>
                       <div>$ {spot.price} night</div>
@@ -344,7 +344,7 @@ const SpotId = () => {
                     <div>{spot.description}</div>
                   </div>
                 </div>
-                <div className="review">
+                <div className="comp">
                   <div className='reserve'>
                     <div className='money'>
                       <div>$ {spot.price} night</div>
@@ -402,7 +402,7 @@ const SpotId = () => {
                   <div>{spot.description}</div>
                 </div>
               </div>
-              <div className="review">
+              <div className="comp">
                 <div className='reserve'>
                   <div className='money'>
                     <div>$ {spot.price} night</div>
