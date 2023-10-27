@@ -49,6 +49,9 @@ const CreateForm = () => {
         url: image.url || defaultImage,
     }));
 
+    const parsedLatitude = parseFloat(latitude);
+    const parsedLongitude = parseFloat(longitude);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const spotObj = {
@@ -57,13 +60,17 @@ const CreateForm = () => {
             address: street,
             city,
             state,
-            lat: latitude,
-            lng: longitude,
+            lat: parsedLatitude,
+            lng: parsedLongitude,
             description,
             name,
             price,
             SpotImages
         };
+
+
+        console.log("Spot object before request:", spotObj);
+
 
         const errors = {}
         if (!country) {
