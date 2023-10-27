@@ -16,7 +16,7 @@ const ManageReview = () => {
 
     const [menu, setMenu] = useState(false);
 
-    const reviewList = list.filter(review => review.userId === user.id);
+    const reviewList = list.filter(review => review.userId === (user ? user.id : null));
 
     useEffect(() => {
         dispatch(getCurrentUserReviewThunk());
@@ -51,7 +51,7 @@ const ManageReview = () => {
         <main>
             <div className="manage-outer-container">
 
-                <div className="manage">
+                <div className="manage-review-h1">
                     <h1>Manage Your Reviews</h1>
                 </div>
                 <ul className="manage-reviews-container">
