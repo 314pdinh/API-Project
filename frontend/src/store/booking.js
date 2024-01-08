@@ -26,17 +26,17 @@ export const createBookingThunk = (spot, booking) => async (dispatch) => {
 
         if (response.ok) {
             const newBooking = await response.json();
-            console.log('ok response newBooking:', newBooking);
+            // console.log('ok response newBooking:', newBooking);
             dispatch(createBooking(newBooking));
             return newBooking;
         } else {
             const error = await response.json();
-            console.log('not ok response error:', error);
+            // console.log('not ok response error:', error);
             return error
         }
 
     } catch (error) {
-        console.log('createBookingThunk ERROR:', error);
+        // console.log('createBookingThunk ERROR:', error);
         return error;
     }
 }
@@ -45,13 +45,13 @@ export const usersBookingsThunk = () => async (dispatch) => {
 
     try {
         const response = await csrfFetch('/api/bookings/current')
-        console.log("usersBookingsThunk response:", response)
+        // console.log("usersBookingsThunk response:", response)
         if (response.ok) {
             const currentUsersBookings = await response.json()
             dispatch(usersBooking(currentUsersBookings))
         }
     } catch (error) {
-        console.log("usersBookingsThunk error", error)
+        // console.log("usersBookingsThunk error", error)
         return error;
     }
 }

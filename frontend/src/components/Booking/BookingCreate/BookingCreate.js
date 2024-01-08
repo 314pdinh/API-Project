@@ -31,7 +31,7 @@ export default function BookingCreate() {
 
         // ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toJSON
         const currentDates = new Date().toJSON().slice(0, 10);
-        console.log('currentDate -------', currentDates);
+        // console.log('currentDate -------', currentDates);
 
         if (startDate < currentDates) {
             setErrors({ startDate: "Cannot book in the past dates" });
@@ -50,8 +50,8 @@ export default function BookingCreate() {
         };
 
 
-        console.log('startDate----------', startDate);
-        console.log('endDate----------', endDate);
+        // console.log('startDate----------', startDate);
+        // console.log('endDate----------', endDate);
 
         try {
             await dispatch(createBookingThunk(spot, newBooking));
