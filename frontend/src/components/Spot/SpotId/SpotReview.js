@@ -27,22 +27,23 @@ const SpotReviews = ({ spot, newReviewList, userReview, userId }) => {
 
   return (
     <>
-      <ul>
+      <ul className="reviews-list">
         {newReviewList.length > 0 && newReviewList.map(review => (
-          <li key={review.id}>
-            <div>{review.User && review.User.firstName}</div>
+          <li key={review.id} className="review-item">
+            <div className="user-name">{review.User && review.User.firstName}</div>
             {review.createdAt.split('-')[1] && (
               <div className="date">
-                {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(review.createdAt))}
+                Reviewed {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(review.createdAt))}
                 {' '}
                 {new Date(review.createdAt).getFullYear()}
               </div>
             )}
-            <div>{review.review}</div>
+            <div className="user-review">"{review.review}"</div>
             {userReview && userId && review.userId === userId && (
               <div className='modal'>
                 <OpenModalMenuItem
                   buttonText="Delete"
+                  className="delete-button"
                   onItemClick={closeMenu}
                   modalComponent={<DeleteReview review={review} spot={spot} />}
                 />
