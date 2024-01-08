@@ -69,7 +69,7 @@ const CreateForm = () => {
         };
 
 
-        console.log("Spot object before request:", spotObj);
+        // console.log("Spot object before request:", spotObj);
 
 
         const errors = {}

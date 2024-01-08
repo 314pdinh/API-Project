@@ -65,12 +65,12 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
 };
 
 export const getCurrentUserSpotThunk = () => async (dispatch) => {
-  console.log('getCurrentUserSpotThunk called');
+  // console.log('getCurrentUserSpotThunk called');
   const response = await csrfFetch('/api/spots/current');
 
   if (response.ok) {
     const userSpots = await response.json();
-    console.log('User Spots Data------------:', userSpots);
+    // console.log('User Spots Data------------:', userSpots);
     dispatch(getCurrentUserSpot(userSpots));
   }
 };
@@ -102,8 +102,8 @@ export const createSpotThunk = (spot, images) => async (dispatch) => {
 
 export const updateSpotThunk = (spot) => async (dispatch) => {
   try {
-    console.log("Update Spot Thunk called with spot:", spot);
-    console.log("Spot ID: ", spot.id);
+    // console.log("Update Spot Thunk called with spot:", spot);
+    // console.log("Spot ID: ", spot.id);
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -112,16 +112,16 @@ export const updateSpotThunk = (spot) => async (dispatch) => {
 
     if (response.ok) {
       const updatedSpotId = await response.json();
-      console.log("Update Spot Thunk - Response from API:", updatedSpotId);
+      // console.log("Update Spot Thunk - Response from API:", updatedSpotId);
       dispatch(updateSpot(updatedSpotId));
       return updatedSpotId;
     } else {
       const errors = await response.json();
-      console.log("Update Spot Thunk - Error Response from API:", errors);
+      // console.log("Update Spot Thunk - Error Response from API:", errors);
       return errors;
     }
   } catch (error) {
-    console.log("Update Spot Thunk - Error:", error);
+    // console.log("Update Spot Thunk - Error:", error);
     return error;
   }
 };
